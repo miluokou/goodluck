@@ -287,7 +287,7 @@
 	  	@show
 	  	<footer id="wgt-footer" class="container wgt-footer">
 		  	<center>
-	&copy;2017米洛口&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/duty/" target="_blank" rel="nofollow">使用米洛口前必读</a>&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_help.html#%E7%BB%8F%E9%AA%8C%E5%8D%8F%E8%AE%AE" target="_blank" rel="nofollow">米洛口文章协议</a>&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_editor.html" target="_blank" rel="nofollow">作者创作作品协议</a>&nbsp;&nbsp;    京ICP证030173号-1 京网文【2013】0934-983号
+	&copy;2017米洛口&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/duty/" target="_blank" rel="nofollow">使用米洛口前必读</a>&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_help.html#%E7%BB%8F%E9%AA%8C%E5%8D%8F%E8%AE%AE" target="_blank" rel="nofollow">米洛口文章协议</a>&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_editor.html" target="_blank" rel="nofollow">作者创作作品协议</a>&nbsp;&nbsp;    京ICP证XXXXX号-X 京网文【XXXX】XXXX-XXX号
 			</center>
 		</footer>
 
