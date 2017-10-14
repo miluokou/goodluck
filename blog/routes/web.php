@@ -29,3 +29,4 @@ Route::get('home/blade', function () {
 Route::get('home/article', function () {
    return view('home.article');
 });
+Route::get('captcha/{tmp}','CodeController@captcha');
