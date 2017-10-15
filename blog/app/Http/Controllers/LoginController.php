@@ -23,7 +23,7 @@ class LoginController extends Controller
     	return view('home.register');
     }
     //验证码
-     public function vcode()
+     public function vcode($tmp)
     {
         //生成验证码图片的Builder对象，配置相应属性
         $builder = new CaptchaBuilder;
@@ -63,7 +63,6 @@ class LoginController extends Controller
 
                 return back()->with('info','添加失败');
             }
-
         }else{
              $request->flashExcept('password');
            return back()->with('info','验证码错误');

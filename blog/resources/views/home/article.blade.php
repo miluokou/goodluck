@@ -8,25 +8,32 @@
 	#content{
 		padding:1% 0;
 	}
-	</style>
+	.list-group{
+		list-style-type:none;
+	}
+	.list-group ul li a:link{
+		color:blue;background-color:green;
+	}
+	</style>_body')
 @endsection
-@section('main_body')
+@section('main
 <div class="container" id="article">
 	<div class="col-md-2">
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-11" id="course">
 		        <h4>
-		            PHP 基础教程
+		            这个标题我给换了
 		        </h4>
-		        <ul>
+		        <ul class="list-group">
 		            <li class="currentLink">
 		                <a href="/php/index.asp" title="PHP 教程">
 		                    PHP 教程
 		                </a>
+		              
 		            </li>
 		            <li>
-		                <a href="/php/php_intro.asp" title="PHP 简介">
+		                <a href="/php/php_intro.asp"  title="PHP 简介">
 		                    PHP 简介
 		                </a>
 		            </li>
@@ -157,6 +164,9 @@
 			git push -u origin master<br>
 
 			
+		</p>
+		<p>
+		<a href="https://baike.baidu.com/item/%E7%B1%BB/6824577">类</a>
 		</p>
 	</div>
 </div>

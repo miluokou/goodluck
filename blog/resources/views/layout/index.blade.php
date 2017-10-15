@@ -112,6 +112,9 @@
 		#submit-btns input{
 			margin:1% 2%;
 		}
+		.modal{
+			margin-top:7%;
+		}
 	</style>
 	
 </head>
@@ -128,10 +131,101 @@
 				<a title="QQ:601071653" href="#" target="_blank">私信<span id="mnum"></span></a>
 				</span>&nbsp;|&nbsp;
 				<span>
-					<a href="/index" target="_blank">米洛口首页</a>&nbsp;
+					<a href="/index" target="_blank">米洛口首页</a>&nbsp;|
+				</span>
+				<span>
+					<!-- <button type="button" data-toggle="modal" data-target="#myModal">
+					  Launch demo modal
+					</button> -->
+					<a href="javascript:void(0);" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+			  			登录
+					</a>&nbsp;|
+					<a href="javascript:void(0);" data-toggle="modal" data-target="#exampleModal1"  data-whatever="@fat">
+			  			注册
+					</a>&nbsp;
+					<!-- 网站登录弹出框 用的bootstrap的模态框 -->
+					<!-- 登陆的页面开始 -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        <span aria-hidden="true">&times;</span>
+					        </button>
+					        <h4 class="modal-title" id="exampleModalLabel">登录
+					        </h4>
+					      </div>
+					      <div class="modal-body">
+					        <form>
+					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">用户名:</label>
+					            <input type="text" class="form-control" id="recipient-name">
+					          </div>
+					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">密码:</label>
+					            <input type="password" class="form-control" id="recipient-name">
+					          </div> 
+					        </form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">
+					        取消
+					        </button>
+					        <button type="button" class="btn btn-primary">
+					        提交
+					        </button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!-- 登陆的页面结束 -->
+					<!-- 注册的页面开始 -->
+					<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        <span aria-hidden="true">&times;</span>
+					        </button>
+					        <h4 class="modal-title" id="exampleModalLabel">注册</h4>
+					      </div>
+					      <div class="modal-body">
+					        <form>
+					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">用户名:</label>
+					            <input type="text" class="form-control" id="recipient-name">
+					          </div>
+					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">密码:</label>
+					            <input type="text" class="form-control" id="recipient-name">
+					          </div>
+					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">确认密码:</label>
+					            <input type="text" class="form-control" id="recipient-name">
+					          </div>
+					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">验证码:</label>
+		
+					            <input type="text" class="form-control" id="recipient-name">
+					          	<a onclick="javascript:re_captcha();" style="..." title="刷新图片">
+								<img src="{{URL('/home/vcode/1')}}" id="captcha" alt="验证码" title="刷新图片" style='margin-left:10px;cursor:pointer' onclick="this.src = this.src+'?a'">
+					          	</a><br>
+					          </div>
+					        </form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					        <button type="button" class="btn btn-primary">发送消息</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!-- 注册的页面结束 -->
+					<!-- 网站登录弹出框 用的bootstrap的模态框 -->
 				</span>
 			</div>
 		</div>
+		
 		@section('nav')
 		<div class="container" id="nav">
 			<nav>

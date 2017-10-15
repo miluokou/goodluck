@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/index','HomeIndexController@index');
 Route::get('/home/register','LoginController@register');
 Route::post('/home/doRegister','LoginController@doRegister');
-Route::get('/home/vcode','LoginController@vcode');
+Route::get('/home/vcode/{tmp}','LoginController@vcode');
 Route::get('/home/edictor', function () {
     // return view('welcome');
     return view('home.edictor');
@@ -29,3 +29,6 @@ Route::get('home/blade', function () {
 Route::get('home/article', function () {
    return view('home.article');
 });
+Route::get('captcha/{tmp}','CodeController@captcha');
+Route::get('/index/captcha/{tmp}', 'YanzhengmaController@captcha'); 
+
