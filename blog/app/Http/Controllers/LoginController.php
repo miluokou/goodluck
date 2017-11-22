@@ -81,21 +81,32 @@ class LoginController extends Controller
         }
     public function send(Request $request){
         $input = $request->all();
-        $captcha['session_vcode'] = Session::get('vcode');
+        // $captcha['session_vcode'] = Session::get('vcode');
         $captcha['input'] = $input;
-        if($input['vcode']== $captcha['session_vcode']){
-            $rand = rand(100000,999999);
-            // Session::flash('rand',$rand);
-            // $captcha['vcode'] = Session::get('vcode');
-            // Session::flash('rand',$rand);
-                Mail::raw("感谢注册 米洛口·光潜 您的验证码为:".$rand."",function($message){
-                    $message->subject('来自米洛口·光潜邮箱注册验证码');
-                    $message->to('348393887@qq.com');
-                }); 
-            echo json_encode(array('state'=>true,'info'=>$captcha));
-        }else{
-            echo json_encode(array('state'=>false,'info'=>$captcha));
-        }
-        
+        $captcha['session_vcode'] =Session::get('vcode');
+        // $captcha['email_vcode'] = empty($input['email_vcode']);
+        // if(empty($input['email_vcode'])){
+            // if($input['vcode']== $captcha['session_vcode']){
+        // var_dump($input);
+        // die;
+                $rand = rand(100000,999999);
+                Session::flash('rand',$rand);
+                    Mail::send("感谢注册 米洛口·光潜 您的验证码为:".$rand."",$input,function($message) use($input){
+                        // $email =$input['email'];
+                        $message->subject('来自米洛口·光潜邮箱注册验证码');
+                        $message->to($input['email']);
+                    }); 
+                echo json_encode(array('state'=>true,'info'=>$captcha));
+            // }else{
+            //     echo json_encode(array('state'=>false,'info'=>$captcha));
+            // }
+        // }else{
+        //     $session_rand = Session::get('rand');
+        //     if($session_rand == $input['rand']){
+        //         echo json_encode(array('state'=>true,'info'=>'email compared'));
+        //     }else{
+        //         echo json_encode(array('state'=>true,'info'=>'email uncompared'));
+        //     }
+        // }
     }
 }

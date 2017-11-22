@@ -78,11 +78,6 @@
 			// });
 			$("input[ name='vcode']").blur(function(){
 				var vcode=  $("input[ name='vcode']").val();
-				// if({{Session::get('vcode')}}){
-				// 	var svcode = {{Session::get('vcode')}};
-				// }else{
-				// 	var svcode = '';
-				// }
 				console.log(typeof(vcode.length));
 				if(vcode.length==5){
 					// $("input[ name='vcode']").popover('hide');
@@ -112,12 +107,48 @@
 							},
 							error: function(xhr, type){
 								$("input[ name='vcode']").popover('hide');
-								alert('Ajax error!');
+								// alert('network error!');
+									console.log(xhr);
 							}
 						});
 					}
 				}
-			});		
+			});
+
+			$("input[ name='email_vcode']").blur(function(){
+				var email_vcode=  $("input[ name='email_vcode']").val();
+
+				console.log(typeof(vcode.length));
+				if(email_vcode.length==6){
+					// $("input[ name='vcode']").popover('hide');
+					var param ={ date : '2017-11-09'};
+					var email=  $("input[ name='email']").val();
+					var vcode=  $("input[ name='vcode']").val();
+
+					if(email && vcode){
+							param['email']=email;
+							param['vcode']=vcode;
+							$.ajax({
+							type: 'POST',
+							url:'/send',
+							data: param,
+							dataType: 'json',
+							headers: {
+							'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+							},
+							success: function(data){
+									console.log(data);
+							},
+							error: function(xhr, type){
+								alert('network error!');
+							}
+						});
+					}
+				}
+			});
+			// 邮件验证结束
+
+
 		}); 
 	</script>
 

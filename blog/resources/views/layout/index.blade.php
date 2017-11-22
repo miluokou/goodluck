@@ -225,7 +225,7 @@
 						          	</div>
 					          </div>
 					          <div class="form-group">
-						            <label for="recipient-name" class="control-label" name='code'>邮箱验证码:</label>
+						            <label for="recipient-name" class="control-label" name='email_vcode'>邮箱验证码:</label>
 						            <input type="text" class="form-control" id="recipient-name" name='email_vcode'>
 					          </div>
 					      </div>
