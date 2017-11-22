@@ -10,10 +10,10 @@ use App\Http\Controllers\Controller;
 //引用对应的命名空间
 use Gregwar\Captcha\CaptchaBuilder;
 use Session;
-use App\Http\Requests\RegisterRequest;
-
 use Hash;
 use DB;
+use Validator;
+use Mail;
 
 class LoginController extends Controller
 {
@@ -31,7 +31,6 @@ class LoginController extends Controller
         $builder->build($width = 100, $height = 40, $font = null);
         //获取验证码的内容
         $phrase = $builder->getPhrase();
-
         //把内容存入session
         Session::flash('vcode', $phrase);
         //生成图片
@@ -39,35 +38,64 @@ class LoginController extends Controller
         header('Content-Type: image/jpeg');
         $builder->output();
     }
-    public function doRegister(RegisterRequest $request)
+    public function doRegister(Request $request)
     {
-        //表单请求验证
-        //读取验证码
-        $captcha = Session::get('vcode');
-        $vcode= $request->only('vcode');
-
-        if($vcode['vcode']==$captcha){
-
-            $request->flashExcept('password');
-            $res = $request->except('_token','rpassword','vcode');
-            $res['password'] = Hash::make($request->input('password'));
-
-            $id = DB::table('user')->insertGetId($res);
-            $userdetail['uid'] = $id;
-            $data = DB::table('userinfo')->insert($userdetail);
-
-            if($data){
-                return redirect('/home/register')->with('info',"添加成功");
-
-            } else {
-
-                return back()->with('info','添加失败');
-            }
-        }else{
-             $request->flashExcept('password');
-           return back()->with('info','验证码错误');
+        $validate = Validator::make($request->input(),
+            [
+            //required 是必填项的意思
+                'name' =>'required|unique:user|min:3|max:100',
+                'email'=>'required|email|unique:user_detail',
+                'email_vcode'=>'required|',
+                'pass'=>'required'
+            ],[
+                'required' =>':attribute 你忘记填啦',
+                'unique' =>':attribute 已经有人用了,换一个',
+                'email' =>':attribute 格式不正确',
+                'min'=>'最少3个字母',
+                'max'=>"不能超过100个字母"
+            ],[
+                'name' =>'这个名字',
+                'pass' => '密码',
+                'email'=>'邮箱',
+                'email_vcode' =>'邮箱验证码'
+            ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
         }
-
+        // var_dump('1231');
+        // // $request
+        // die;
+        $data=[];
+        $input = $request->all();
+                      $data['name']=$input['name'];
+                $data['pass'] = $input['pass'];
+                $res=DB::table('user')->insert($data);
+                if($res){
+                    Session::flash('info','注册成功');
+                    return redirect('/index');
+                }else{
+                    Session::flash('info','注册失败');
+                    return redirect('/index');
+                }
+            
+        }
+    public function send(Request $request){
+        $input = $request->all();
+        $captcha['session_vcode'] = Session::get('vcode');
+        $captcha['input'] = $input;
+        if($input['vcode']== $captcha['session_vcode']){
+            $rand = rand(100000,999999);
+            // Session::flash('rand',$rand);
+            // $captcha['vcode'] = Session::get('vcode');
+            // Session::flash('rand',$rand);
+                Mail::raw("感谢注册 米洛口·光潜 您的验证码为:".$rand."",function($message){
+                    $message->subject('来自米洛口·光潜邮箱注册验证码');
+                    $message->to('348393887@qq.com');
+                }); 
+            echo json_encode(array('state'=>true,'info'=>$captcha));
+        }else{
+            echo json_encode(array('state'=>false,'info'=>$captcha));
+        }
+        
     }
-
 }

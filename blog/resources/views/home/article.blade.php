@@ -14,9 +14,9 @@
 	.list-group ul li a:link{
 		color:blue;background-color:green;
 	}
-	</style>_body')
+	</style>
 @endsection
-@section('main
+@section('main_body')
 <div class="container" id="article">
 	<div class="col-md-2">
 		<div class="col-md-1">

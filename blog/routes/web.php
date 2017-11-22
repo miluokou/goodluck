@@ -19,16 +19,20 @@ Route::get('/index','HomeIndexController@index');
 Route::get('/home/register','LoginController@register');
 Route::post('/home/doRegister','LoginController@doRegister');
 Route::get('/home/vcode/{tmp}','LoginController@vcode');
-Route::get('/home/edictor', function () {
+Route::get('/home/edictor', function(){
     // return view('welcome');
     return view('home.edictor');
 });
+Route::post('home/edictor/post','EdictorController@edictor');
 Route::get('home/blade', function () {
    return view('child');
 });
 Route::get('home/article', function () {
    return view('home.article');
 });
-Route::get('captcha/{tmp}','CodeController@captcha');
-Route::get('/index/captcha/{tmp}', 'YanzhengmaController@captcha'); 
+Route::post('/send','LoginController@send');
+
+Route::get('/validation','ValidationController@showform');
+Route::post('/validation','ValidationController@validateform');
+
 

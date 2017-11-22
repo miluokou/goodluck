@@ -22,6 +22,9 @@
                 <input type="text" class="form-control" id="exampleInputName2" placeholder="文章标题" style="border-width:0px;border-bottom:1 solid black">
                 </div> -->
                 <!-- 引用标题 -->
+        <form action="edictor/post" method="post">
+            <!-- {{csrf_token()}} -->
+            {{ csrf_field() }}
                 <center>
                 <section class="content bgcolor-8">
                     <span class="input input--isao">
@@ -79,10 +82,12 @@
                 <center>
                     <input  type="button" class="btn btn-default col-md-2" value="预览"></input>
                     <input  type="button" class="btn btn-default col-md-2" value="保存草稿"></input>
-                    <input  type="button" class="btn btn-info col-md-2" value="发布"></input>
+                    <input  type="submit" class="btn btn-info col-md-2" value="发布"></input>
                 </center>
             </div>
         </div>
+
+        </form>
         
     </div>
 

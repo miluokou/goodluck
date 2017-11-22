@@ -16,7 +16,7 @@
 		$builder->build(150,32);
 		$phrase = $builder->getPhrase();
 		//把内容存入session
-	         Session::flash('milkcaptcha', $phrase); //存储验证码
+	        Session::flash('milkcaptcha', $phrase); //存储验证码
 	        ob_clean();
 	         return response($builder->output())->header('Content-type','image/jpeg');
 	    } 
