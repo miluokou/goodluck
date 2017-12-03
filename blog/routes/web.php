@@ -31,6 +31,7 @@ Route::get('home/article', function () {
    return view('home.article');
 });
 Route::post('/send','LoginController@send');
+Route::post('/login','LoginController@login');
 
 Route::get('/validation','ValidationController@showform');
 Route::post('/validation','ValidationController@validateform');

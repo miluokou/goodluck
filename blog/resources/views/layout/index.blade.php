@@ -134,7 +134,7 @@
 					<!-- <button type="button" data-toggle="modal" data-target="#myModal">
 					  Launch demo modal
 					</button> -->
-					<a href="javascript:void(0);" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+					<a href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" id='login'>
 			  			登录
 					</a>&nbsp;|
 					<a href="#" data-toggle="modal" data-target="#exampleModals"  data-whatever="@fat" id='register'>
@@ -142,6 +142,8 @@
 					</a>&nbsp;
 					<!-- 网站登录弹出框 用的bootstrap的模态框 -->
 					<!-- 登陆的页面开始 -->
+				<form action='/login' method='post'>
+					{!! csrf_field() !!}
 					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
@@ -149,32 +151,45 @@
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					        <span aria-hidden="true">&times;</span>
 					        </button>
-					        <h4 class="modal-title" id="exampleModalLabel">登录
-					        </h4>
+					        <h4 class="modal-title" id="exampleModalLabel">登录</h4>
 					      </div>
 					      <div class="modal-body">
-					        <form>
-					          <div class="form-group">
-					            <label for="recipient-name" class="control-label">用户名:</label>
-					            <input type="text" class="form-control" id="recipient-name">
+					          <div class="form-group has-success">
+					            <label for="recipient-name" class="control-label">笔名:</label>
+					            <input type="text" class="form-control" id="recipient-name" name='login_name' value="{{ old('name') }}">
+
+					            <span id="login_helpBlock1" class="help-block">{{$errors->first('login_name')}}</span>
+
+					          </div>
+					          <div class="form-group has-warning">
+					            <label for="recipient-name" class="control-label">密码:</label>
+					            <input type="password" class="form-control" id="recipient-name" name='login_pass'>
+					           	<span id="login_helpBlock2" class="help-block">{{$errors->first('login_pass')}}</span>
 					          </div>
 					          <div class="form-group">
-					            <label for="recipient-name" class="control-label">密码:</label>
-					            <input type="password" class="form-control" id="recipient-name">
-					          </div> 
-					        </form>
+						          	<div id='form-group_yanzhengma'>
+						            	<label for="recipient-name" class="control-label" name='code'>验证码:</label>
+						            	<input type="text" class="form-control" id="vcode_id" name='vcode' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="邮件已经发送,请把验证码填写到下面">
+						            	<!-- <span id="helpBlock1" class="help-block">{{$errors->first('vcode')}}</span> -->
+						        	</div>
+						        	<br>
+						        	<div>
+						          		<a onclick="javascript:void(0);" style="..." title="刷新图片">
+											<img src="{{URL('/home/vcode/1')}}" id="captcha" alt="验证码" title="刷新图片" style='margin-left:10px;cursor:pointer' onclick="this.src = this.src+1">
+						          		</a>
+						          	</div>
+						          	
+					          </div>
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">
-					        取消
-					        </button>
-					        <button type="button" class="btn btn-primary">
-					        提交
-					        </button>
+					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					        <input type="submit" class="btn btn-primary" value="提交" >
+					        <!-- <input type="submit"  -->
 					      </div>
 					    </div>
 					  </div>
 					</div>
+				</form>
 					<!-- 登陆的页面结束 -->
 					<!-- 注册的页面开始 -->
 				<form action='/home/doRegister' method='post'>
@@ -212,26 +227,17 @@
 					             <span id="helpBlock4" class="help-block">{{$errors->first('email')}}</span>
 					          </div>
 					          <div class="form-group">
-						          	<div id='form-group_yanzhengma'>
-						            	<label for="recipient-name" class="control-label" name='code'>验证码:</label>
-						            	<input type="text" class="form-control" id="vcode_id" name='vcode' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="邮件已经发送">
-						            	<!-- <span id="helpBlock1" class="help-block">{{$errors->first('vcode')}}</span> -->
-						        	</div>
-						        	<br>
-						        	<div>
-						          		<a onclick="javascript:void(0);" style="..." title="刷新图片">
-											<img src="{{URL('/home/vcode/1')}}" id="captcha" alt="验证码" title="刷新图片" style='margin-left:10px;cursor:pointer' onclick="this.src = this.src+'?a'">
-						          		</a>
-						          	</div>
-					          </div>
+						          		<input type="button" class="btn btn-primary" id="btn" value="点击发送邮箱验证码"/>
+						      </div>
 					          <div class="form-group">
 						            <label for="recipient-name" class="control-label" name='email_vcode'>邮箱验证码:</label>
-						            <input type="text" class="form-control" id="recipient-name" name='email_vcode'>
+						            <input type="text" class="form-control" id="email_vcode" name='email_vcode' data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=''>
 					          </div>
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					        <button type="submit" class="btn btn-primary" id='regiser_submit'>提交</button
+					        <input type="submit" class="btn btn-primary" id='regiser_submit' value="提交" disabled="disabled">
+					        <!-- <input type="submit"  -->
 					      </div>
 					    </div>
 					  </div>
@@ -398,7 +404,13 @@
 	  	@show
 	  	<footer id="wgt-footer" class="container wgt-footer">
 		  	<center>
-	&copy;2017米洛口&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/" target="_blank" rel="nofollow">使用米洛口前必读</a>&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_help.html#%E7%BB%8F%E9%AA%8C%E5%8D%8F%E8%AE%AE" target="_blank" rel="nofollow">米洛口文章协议</a>&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_editor.html" target="_blank" rel="nofollow">作者创作作品协议</a>&nbsp;&nbsp;    京ICP证XXXXX号-X 京网文【XXXX】XXXX-XXX号
+	&copy;2017米洛口&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/" target="_blank" rel="nofollow">使用米洛口前必读</a>
+	&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_help.html#%E7%BB%8F%E9%AA%8C%E5%8D%8F%E8%AE%AE" target="_blank" rel="nofollow">米洛口文章协议</a>
+	&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_editor.html" target="_blank" rel="nofollow">作者创作作品协议</a>
+	&nbsp;&nbsp;    京ICP证XXXXX号-X 京网文【XXXX】XXXX-XXX号
+			<a href="http://www.prccopyright.org.cn/default.aspx">中国文字著作协会</a>
+			<a href="http://naotu.baidu.com/">百度脑图</a>
+
 			</center>
 		</footer>
 		<script type="text/javascript">
