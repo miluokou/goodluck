@@ -62,13 +62,16 @@ class LoginController extends Controller
         if($validate->fails()){
             return redirect()->back()->withErrors($validate)->withInput();
         }
+
         // var_dump('1231');
         // // $request
         // die;
         $data=[];
         $input = $request->all();
-                      $data['name']=$input['name'];
+
+                $data['name']=$input['name'];
                 $data['pass'] = $input['pass'];
+                $data['token'] = $input['_token'];
                 $res=DB::table('user')->insert($data);
                 if($res){
                     Session::flash('info','注册成功');
@@ -131,11 +134,22 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validate)->withInput();
         }
         $input = $request->all();
-
-        var_dump($input);
-        die;
-        $user = DB::table('users')->where('name', 'John')->first();
-
+        $username = $input['login_name'];
+        $userpass = $input['login_pass'];
+        if(!empty($username)){
+            $user = DB::table('user')->where('name', $username)->first();
+            $ser_username = $user->name;
+            $ser_userpass = $user->pass;
+            $token = $user->token;
+            if($ser_username == $username && $ser_userpass==$userpass){
+                echo json_encode(array('state'=>true,'info'=>$token,'username'=>$username));
+            }else{
+                echo json_encode(array('state'=>false));
+            }
+            // if($ser_username==$username && )
+        }else{
+            echo json_encode(array('state'=>false));
+        }
     }
 
 }

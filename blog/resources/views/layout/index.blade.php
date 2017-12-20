@@ -142,7 +142,7 @@
 					</a>&nbsp;
 					<!-- 网站登录弹出框 用的bootstrap的模态框 -->
 					<!-- 登陆的页面开始 -->
-				<form action='/login' method='post'>
+				<!-- <form action='/login' method='post'> -->
 					{!! csrf_field() !!}
 					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 					  <div class="modal-dialog" role="document">
@@ -155,20 +155,20 @@
 					      </div>
 					      <div class="modal-body">
 					          <div class="form-group has-success">
-					            <label for="recipient-name" class="control-label">笔名:</label>
-					            <input type="text" class="form-control" id="recipient-name" name='login_name' value="{{ old('name') }}">
+					            <label for="login_name" class="control-label">笔名:</label>
+					            <input type="text" class="form-control" id="login_name" name='login_name' value="{{ old('name') }}">
 
 					            <span id="login_helpBlock1" class="help-block">{{$errors->first('login_name')}}</span>
 
 					          </div>
 					          <div class="form-group has-warning">
-					            <label for="recipient-name" class="control-label">密码:</label>
-					            <input type="password" class="form-control" id="recipient-name" name='login_pass'>
+					            <label for="login_pass" class="control-label">密码:</label>
+					            <input type="password" class="form-control" id="login_pass" name='login_pass'>
 					           	<span id="login_helpBlock2" class="help-block">{{$errors->first('login_pass')}}</span>
 					          </div>
 					          <div class="form-group">
 						          	<div id='form-group_yanzhengma'>
-						            	<label for="recipient-name" class="control-label" name='code'>验证码:</label>
+						            	<label for="vcode_id" class="control-label" name='code'>验证码:</label>
 						            	<input type="text" class="form-control" id="vcode_id" name='vcode' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="邮件已经发送,请把验证码填写到下面">
 						            	<!-- <span id="helpBlock1" class="help-block">{{$errors->first('vcode')}}</span> -->
 						        	</div>
@@ -183,13 +183,14 @@
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					        <input type="submit" class="btn btn-primary" value="提交" >
+					        <!-- <input type="submit" class="btn btn-primary" value="提交" > -->
+					        <input type="button" class="btn btn-primary" data-dismiss="modal" value="提交" id="register_submit">
 					        <!-- <input type="submit"  -->
 					      </div>
 					    </div>
 					  </div>
 					</div>
-				</form>
+				<!-- </form> -->
 					<!-- 登陆的页面结束 -->
 					<!-- 注册的页面开始 -->
 				<form action='/home/doRegister' method='post'>
@@ -205,20 +206,20 @@
 					      </div>
 					      <div class="modal-body">
 					          <div class="form-group has-success">
-					            <label for="recipient-name" class="control-label">笔名:</label>
-					            <input type="text" class="form-control" id="recipient-name" name='name' value="{{ old('name') }}">
+					            <label for="register_name" class="control-label">笔名:</label>
+					            <input type="text" class="form-control" id="register_name" name='name' value="{{ old('name') }}">
 
 					            <span id="helpBlock1" class="help-block">{{$errors->first('name')}}</span>
 
 					          </div>
 					          <div class="form-group has-warning">
-					            <label for="recipient-name" class="control-label">密码:</label>
-					            <input type="password" class="form-control" id="recipient-name" name='pass'>
+					            <label for="register_pass" class="control-label">密码:</label>
+					            <input type="password" class="form-control" id="register_pass" name='pass'>
 					           	<span id="helpBlock2" class="help-block">{{$errors->first('pass')}}</span>
 					          </div>
 					          <div class="form-group has-error">
-					            <label for="recipient-name" class="control-label">确认密码:</label>
-					            <input type="password" class="form-control" id="recipient-name" name='rpass' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="两次密码输入不一致">
+					            <label for="register_rpass" class="control-label">确认密码:</label>
+					            <input type="password" class="form-control" id="register_rpass" name='rpass' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="两次密码输入不一致">
 					            <span id="helpBlock3" class="help-block">{{$errors->first('rpass')}}</span>
 					          </div>
 					          <div class="form-group has-success">
@@ -227,7 +228,7 @@
 					             <span id="helpBlock4" class="help-block">{{$errors->first('email')}}</span>
 					          </div>
 					          <div class="form-group">
-						          		<input type="button" class="btn btn-primary" id="btn" value="点击发送邮箱验证码"/>
+						          		<input type="button" class="btn btn-primary" id="btn" value="点击发送邮箱验证码" disabled="disabled"/>
 						      </div>
 					          <div class="form-group">
 						            <label for="recipient-name" class="control-label" name='email_vcode'>邮箱验证码:</label>
