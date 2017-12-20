@@ -17,7 +17,9 @@
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<!-- <link rel="stylesheet" href="home/tanchu/css/login.css" /> -->
-	<link rel="stylesheet" href="home/login/css/main.css" />
+	<link rel="stylesheet" href="/home/login/css/main.css" />
+	<script type="text/javascript" src="/js/login.js"></script>
+	
 	@section('css')
 	@show
 	<style type="text/css">
@@ -35,6 +37,7 @@
 		.bs-example{
 			border:1px solid #ddd;
 		    border-radius: 4px 4px 0 0;
+		    margin: 0.5% 0;
 		}
 		/*去掉轮播图两侧阴影*/
 		.carousel-control.left {
@@ -78,9 +81,6 @@
 			height: 100px;
 			line-height: 100px;
 		}
-		.bs-example{
-			margin: 1% 0;
-		}
 		.carousel-inner{
 			margin:1% 0;
 		}
@@ -88,7 +88,7 @@
 			padding-bottom: 5%;
 		}
 		.user_gap{
-			margin:3% 0;
+			margin:2% 0;
 		}
 		.img-thumbnail{
 			margin: 3% 0;
@@ -119,17 +119,18 @@
 		<div class="container" id="top_right">
 			<div class="pull-right">
 				<span>
+					<a href="/index" target="_blank">米洛口首页</a>&nbsp;|
+				</span>
+				<span>
 				<a id="my-home-exp" href="/home/article" target="_blank" log="type:100,pos:userbar">我的文章</a>
 				</span>&nbsp;|&nbsp;
 				<span>
 				<a id="my-income" href="#" target="_blank">我的米粒</a>
 				</span>&nbsp;|&nbsp;
 				<span>
-				<a title="QQ:348393887" href="#" target="_blank">私信<span id="mnum"></span></a>
+				<a title="QQ:348393887" href="#" target="_blank">情书💌<span id="mnum"></span></a>
 				</span>&nbsp;|&nbsp;
-				<span>
-					<a href="/index" target="_blank">米洛口首页</a>&nbsp;|
-				</span>
+				
 				<span>
 					<!-- <button type="button" data-toggle="modal" data-target="#myModal">
 					  Launch demo modal
@@ -273,7 +274,7 @@
 		<!-- 排名 -->
 		<div class="container" id="main_body">
 			<!-- 轮播图开始 -->
-			<div id="carousel-example-generic" class="carousel slide col-md-8" data-ride="carousel">
+			<div id="carousel-example-generic" class="carousel slide col-md-8 col-sm-8" data-ride="carousel">
 			  <!-- Indicators -->
 			  <ol class="carousel-indicators">
 			    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -313,26 +314,26 @@
 			</div>
 			<!-- 轮播图结束 -->
 			<!-- 头像开始 -->
-			 <div class="container bs-example col-md-4 pull-right" id="user">
-			 	<div class="container col-md-12">
+			 <div class="container bs-example col-md-4 col-sm-4 col-xs-4 pull-right" id="user">
+			 	<div class="container col-md-12 col-sm-12 col-xs-12 ">
 			 			<center>
 				 			<div> 	
 					 		<!-- <img src="home/img/portfolio_pic8.jpg" alt="..." class="img-circle"> -->
 					 		<img src="home/img/portfolio_pic8.jpg" alt="头像" class="img-thumbnail">
 					 		</div>
 					 		<div class="user_gap">
-					 			<a href="index">网站建设中，可以通过公众号跟我联系↑↑↑↑↑↑</a>
+					 			<a href="index">米洛口的公众号↑↑↑↑↑↑</a>
 					 		</div>
-							<div id="send" class="user_gap">
+							<div id="send">
 									<a href="home/edictor"><button type="button" class="btn btn-info user_gap">发布文章</button></a><br>
-								 	<button type="button" class="btn user_gap">本站目前一共有XXXXXX位用户</button>
-								 	<button type="button" class="btn user_gap">排名XXX</button>		 		
+								 	<span>本站目前一共有XXXXXX位用户</span>	<br> 		
+								 	<span>你的综合排名:XXX</span>		 		
 							</div>
 						</center>
 				</div>
 			 </div>
 			<!-- 头像结束 -->
-				<div class="bs-example col-md-8" data-example-id="simple-table">
+				<div class="bs-example col-md-8 col-sm-8 col-xs-8" data-example-id="simple-table">
 				    <table class="table table-striped">
 				      <caption>本周最佳</caption>
 				      <thead>
@@ -366,7 +367,7 @@
 				    </table>
 				 </div>
 			
-				<div class="bs-example col-md-8" data-example-id="simple-responsive-table">
+				<div class="bs-example col-md-8 col-sm-8 col-xs-8" data-example-id="simple-responsive-table">
 				    <div class="table-responsive">
 				      <table class="table table-striped">
 				      	<caption>本月最佳</caption>

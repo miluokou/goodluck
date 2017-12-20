@@ -37,8 +37,8 @@
                     </span>
                 </section>
                 <!-- 引用标题 -->
-                <div container="container">
-                    <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <script id="editor" type="text/plain" style="height:500px;"></script>
                 </div>
                 </center>
        

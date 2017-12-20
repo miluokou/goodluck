@@ -10,17 +10,17 @@ use App\Http\Controllers\Controller;
 //引用对应的命名空间
 use Gregwar\Captcha\CaptchaBuilder;
 use Session;
-use App\Http\Requests\RegisterRequest;
-
 use Hash;
 use DB;
+use Validator;
 
 class EdictorController extends Controller
 {
     //
-     public function edictor(RegisterRequest $request)
+     public function edictor(Request $request)
     {
-    	var_dump($request);
+    	$input = $request->all();
+    	var_dump($input);
     	die;
     	// return view('home.register');
     }
