@@ -24,16 +24,17 @@ Route::get('/home/edictor', function(){
     return view('home.edictor');
 });
 Route::post('home/edictor/post','EdictorController@edictor');
-Route::get('home/blade', function () {
-   return view('child');
-});
+
 Route::get('home/article', function () {
    return view('home.article');
+});
+Route::get('home/center', function () {
+   return view('home.center');
 });
 Route::post('/send','LoginController@send');
 Route::post('/login','LoginController@login');
 
-Route::get('/validation','ValidationController@showform');
-Route::post('/validation','ValidationController@validateform');
+Route::post('/addcate','CateController@addcate');
+
 
 

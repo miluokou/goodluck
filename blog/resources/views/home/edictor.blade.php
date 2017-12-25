@@ -9,6 +9,11 @@
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <style type="text/css">
+        .selection{
+            margin-bottom: 1%;
+        }
+    </style>
 @endsection
 
 @section('nav')
@@ -16,12 +21,6 @@
 
 @section('main_body')
     <div class="container">
-                <!-- <a href="/index">返回首页</a> -->
-                <!-- <div class="form-group">
-                <label for="exampleInputName2">标题:</label>
-                <input type="text" class="form-control" id="exampleInputName2" placeholder="文章标题" style="border-width:0px;border-bottom:1 solid black">
-                </div> -->
-                <!-- 引用标题 -->
         <form action="edictor/post" method="post">
             <!-- {{csrf_token()}} -->
             {{ csrf_field() }}
@@ -36,11 +35,35 @@
                         </h3>
                     </span>
                 </section>
+                </center>
+                <div class="container col-md-12 ">
+                    <div class="col-md-3 col-sm-3 col-xl-3 selection">
+                        <select class="form-control col-md-3 col-sm-3 col-xl-3">
+                          <option>---请选择分类---</option>
+                          <option>诗歌</option>
+                          <option>小说</option>
+                          <option>散文</option>
+                          <option>剧本</option>
+                          <option>寓言</option>
+                          <option>童话</option>
+                          <option>善良者保护协会</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xl-3 selection">
+                        <select class="form-control col-md-3 col-sm-3 col-xl-3">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                    </div>
+                </div>
                 <!-- 引用标题 -->
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <script id="editor" type="text/plain" style="height:500px;"></script>
+                    <script id="editor" type="text/plain" style="height:500px;width:100%;"></script>
                 </div>
-                </center>
+                <!-- </center> -->
        
         <!-- <div id="btns">
             <div>

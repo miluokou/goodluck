@@ -27,7 +27,7 @@ $(document).ready(function(){
 				        $("#btn").attr('value','点击发送邮箱验证码');
 				        countdown = 60;   
 				        return;  
-				    } else {   
+				    } else {  
 				        $("#btn").attr("disabled",true);  
 				        $("#btn").attr("value","稍后可点击重新发送(" + countdown + ")");  
 				        countdown--; 

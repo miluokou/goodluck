@@ -19,6 +19,7 @@
 	<!-- <link rel="stylesheet" href="home/tanchu/css/login.css" /> -->
 	<link rel="stylesheet" href="/home/login/css/main.css" />
 	<script type="text/javascript" src="/js/login.js"></script>
+	<script type="text/javascript" src="/js/echarts.js"></script>
 	
 	@section('css')
 	@show
@@ -119,16 +120,16 @@
 		<div class="container" id="top_right">
 			<div class="pull-right">
 				<span>
-					<a href="/index" target="_blank">米洛口首页</a>&nbsp;|
+					<a href="/index">米洛口首页</a>&nbsp;|
 				</span>
 				<span>
 				<a id="my-home-exp" href="/home/article" target="_blank" log="type:100,pos:userbar">我的文章</a>
 				</span>&nbsp;|&nbsp;
 				<span>
-				<a id="my-income" href="#" target="_blank">我的米粒</a>
+				<a id="my-income" href="/home/center" target="_blank">我的米洛口</a>
 				</span>&nbsp;|&nbsp;
 				<span>
-				<a title="QQ:348393887" href="#" target="_blank">情书💌<span id="mnum"></span></a>
+				<a title="QQ:348393887" href="#" target="_blank">情书<span id="mnum"></span></a>
 				</span>&nbsp;|&nbsp;
 				
 				<span>
