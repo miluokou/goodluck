@@ -15,8 +15,9 @@
   padding-top:3%;
 }
 .set-btn{
-  float: right;
-  margin-top:3%;
+  float: left;
+  margin-top:2%;
+  margin-right: 2%;
 
 }
 .set-menu :hover{
@@ -35,6 +36,26 @@ $('#myTabs a').click(function (e) {
 //       alert('123');
 //   })
 // })
+</script>
+<script type="text/javascript">
+  $.ajax({
+        type: 'GET',
+        url: 'home/center',
+        dataType: 'JSON',
+        cache: false,
+        async: false,
+        success: function(data) {
+          console.log(data);
+          for (var i=0;i<data.length;i++)
+          {
+            console.log(i);
+          // document.write(data[i] + "<br>");
+          }
+        },
+        error: function(jqXHR) {
+          console.log(jqXHR.status);
+        }
+      });
 </script>
 
 <div class="container" id="center">
@@ -74,19 +95,19 @@ $('#myTabs a').click(function (e) {
                 {!! csrf_field() !!}
                 <div class="form-group">
                   <label for="recipient-name" class="control-label">子类名称:</label>
-                  <input type="text" class="form-control" id="recipient-name" name="cate_name">
+                  <input type="text" class="form-control" id="cate_name" name="cate_name">
                 </div>
                 <div class="form-group">
                   <label>
                     <select class="form-control col-md-6 col-sm-6 col-xl-6" name="cate_father">
                             <option value="0">---请选择父类---</option>
-                            <option value="1">诗歌</option>
+                            <!-- <option value="1">诗歌</option>
                             <option>小说</option>
                             <option>散文</option>
                             <option>剧本</option>
                             <option>寓言</option>
-                            <option>童话</option>
-                            <option>善良者保护协会</option>
+                            <option>童话</option> -->
+                            <!-- <option>善良者保护协会</option> -->
                     </select>
                   </label>
                 </div>

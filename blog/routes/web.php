@@ -28,13 +28,15 @@ Route::post('home/edictor/post','EdictorController@edictor');
 Route::get('home/article', function () {
    return view('home.article');
 });
-Route::get('home/center', function () {
-   return view('home.center');
-});
+// Route::get('home/center', function () {
+//    return view('home.center');
+// });
 Route::post('/send','LoginController@send');
 Route::post('/login','LoginController@login');
 
-Route::post('/addcate','CateController@addcate');
+Route::post('/addcate','CenterController@addcate');
+Route::get('home/center','CenterController@center');
+Route::get('/center','CenterController@index');
 
 
 

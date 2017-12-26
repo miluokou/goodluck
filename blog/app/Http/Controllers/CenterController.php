@@ -15,12 +15,38 @@ use DB;
 use Validator;
 use Mail;
 
-class CateController extends Controller
+class CenterController extends Controller
 {
     //
-     public function register()
+    public function index()
     {
-    	return view('home.register');
+         // $user = DB::table('cate')->where('name', $username)->first();
+        //  $cates = DB::table('cate')->get();
+        //  foreach ($cates as $key => $value) {
+        //     $cate[$key]=$value->name;
+        //      // var_dump($value);
+             
+        //  }
+        //  // echo '<pre>';
+        //  //     var_dump($cate);
+        //  //     die;
+        // echo json_encode(array('state'=>false,'info'=>$cate));
+        return view('home.center');
+    }
+     public function center()
+    {
+         // $user = DB::table('cate')->where('name', $username)->first();
+         $cates = DB::table('cate')->get();
+         foreach ($cates as $key => $value) {
+            $cate[$key]=$value->name;
+             // var_dump($value);
+             
+         }
+         // echo '<pre>';
+         //     var_dump($cate);
+         //     die;
+        echo json_encode(array('state'=>false,'info'=>$cate));
+    	// return view('home.center')->with("cate",$cate);
     }
     public function doRegister(Request $request)
     {
@@ -125,8 +151,10 @@ class CateController extends Controller
         $data['name']=$input['cate_name'];
         // var_dump($data);
         // die;
-        if(!empty($data)){
+        if(!empty($data) && $data['pid']==0){
         	$res = DB::table('cate')->insert($data);
+        }else{
+            echo "pid 不等于0";
         }
         if($res){
         	echo "添加成功";
