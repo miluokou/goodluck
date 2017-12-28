@@ -126,7 +126,7 @@
 				<a id="my-home-exp" href="/home/article" target="_blank" log="type:100,pos:userbar">我的文章</a>
 				</span>&nbsp;|&nbsp;
 				<span>
-				<a id="my-income" href="/home/center" target="_blank">我的米洛口</a>
+				<a id="my-income" href="/center" target="_blank">我的米洛口</a>
 				</span>&nbsp;|&nbsp;
 				<span>
 				<a title="QQ:348393887" href="#" target="_blank">情书<span id="mnum"></span></a>

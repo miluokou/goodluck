@@ -38,24 +38,70 @@ $('#myTabs a').click(function (e) {
 // })
 </script>
 <script type="text/javascript">
-  $.ajax({
+$(document).ready(function(){
+  var storage = window.localStorage;
+    $.ajax({
         type: 'GET',
         url: 'home/center',
         dataType: 'JSON',
         cache: false,
         async: false,
         success: function(data) {
-          console.log(data);
-          for (var i=0;i<data.length;i++)
-          {
-            console.log(i);
-          // document.write(data[i] + "<br>");
+          console.log(data.info);
+          storage.cate= data.info;
+          // console.log(data.info.length);
+          var html;
+      // console.log(storage.cate);
+         function isArray(o){
+            return Object.prototype.toString.call(o)=='[object Array]';
           }
+          for (var i=0;i<data.info.length;i++)
+          {
+            // console.log(i);
+            var j=i+1;
+            // if()
+            // console.log(j);
+            // console.log(isArray(data.info[i]));
+            if(isArray(data.info[i])){
+              data.info[i]=data.info[i][0];
+            }
+            if(i==0){
+              html = '<option value="'+j+'">'+data.info[i]+'</option>';
+            }else{
+              html += '<option value="'+j+'">'+data.info[i]+'</option>';
+            }
+             // console.log(html);
+          }
+          // console.log(html);
+          $("[name='cate_father']").append(html);
+         
         },
         error: function(jqXHR) {
           console.log(jqXHR.status);
         }
       });
+
+    $(document).on("change","#cateselect",function(){
+      var html;
+      console.log(storage.cate);
+          // for (var i=0;i<data.info.length;i++)
+          // {
+          //   // console.log(i);
+          //   var j=i+1;
+          //   console.log(j);
+          //   if(i==0){
+          //     html = '<option value="'+j+'">'+data.info[i]+'</option>'
+          //   }else{
+          //     html += '<option value="'+j+'">'+data.info[i]+'</option>'
+          //   }
+            
+          // }
+          // console.log(html);
+          // $("[name='cate_father']").append(html);
+
+    })
+     
+})
 </script>
 
 <div class="container" id="center">
@@ -99,7 +145,7 @@ $('#myTabs a').click(function (e) {
                 </div>
                 <div class="form-group">
                   <label>
-                    <select class="form-control col-md-6 col-sm-6 col-xl-6" name="cate_father">
+                    <select class="form-control col-md-6 col-sm-6 col-xl-6" name="cate_father" id="cateselect">
                             <option value="0">---请选择父类---</option>
                             <!-- <option value="1">诗歌</option>
                             <option>小说</option>
