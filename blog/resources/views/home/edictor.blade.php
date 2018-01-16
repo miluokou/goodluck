@@ -21,41 +21,36 @@
 
 @section('main_body')
     <div class="container">
-        <form action="edictor/post" method="post">
+        <form action="edictor/edit" method="post">
             <!-- {{csrf_token()}} -->
             {{ csrf_field() }}
                 <center>
                 <section class="content bgcolor-8">
                     <span class="input input--isao">
                         <h3>
-                        <input class="input__field input__field--isao" type="text" id="input-38" onfocus="javascript:if(this.value=='文章标题')this.value='';" value="文章标题" />
-                        <label class="input__label input__label--isao" for="input-38" data-content="">
+                        <input class="input__field input__field--isao" type="text" id="title" onfocus="javascript:if(this.value=='文章标题')this.value='';" value="" name="title"/>
+
+                        <label class="input__label input__label--isao" for="title" data-content="">
                             <span class="input__label-content input__label-content--isao"></span>
                         </label>
                         </h3>
                     </span>
                 </section>
                 </center>
-                <div class="container col-md-12 ">
+                <div class="col-md-12 col-sm-12 col-xl-12">
                     <div class="col-md-3 col-sm-3 col-xl-3 selection">
-                        <select class="form-control col-md-3 col-sm-3 col-xl-3">
-                          <option>---请选择分类---</option>
-                          <option>诗歌</option>
-                          <option>小说</option>
-                          <option>散文</option>
-                          <option>剧本</option>
-                          <option>寓言</option>
-                          <option>童话</option>
-                          <option>善良者保护协会</option>
+                        <select class="form-control col-md-4 col-sm-4 col-xl-4" name="cate_father" id="cateselect">
+                            <option value="0">---请选择父类---</option>
                         </select>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xl-3 selection">
-                        <select class="form-control col-md-3 col-sm-3 col-xl-3">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                        <select class="form-control col-md-4 col-sm-4 col-xl-4" name="cate_father1" id="cateselect2">
+                            <option value="0">---请选择父类---</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xl-3 selection">
+                        <select class="form-control col-md-4 col-sm-4 col-xl-4" name="cate_father2" id="cateselect3">
+                            <option value="0">---请选择父类---</option>
                         </select>
                     </div>
                 </div>
@@ -102,11 +97,11 @@
         <!-- <input  type="button" class="btn btn-info btn-lg btn-block" value="发布"></input> -->
         <div class="container pull-left" id="submit-btn">
             <div id="submit-btns">
-                <center>
+                <!-- <center> -->
                     <input  type="button" class="btn btn-default col-md-2" value="预览"></input>
-                    <input  type="button" class="btn btn-default col-md-2" value="保存草稿"></input>
-                    <input  type="submit" class="btn btn-info col-md-2" value="发布"></input>
-                </center>
+                    <input  type="submit" class="btn btn-default col-md-2" value="保存草稿"></input>
+                    <input  type="button" class="btn btn-info col-md-2" value="发布" id="submit"></input>
+                <!-- </center> -->
             </div>
         </div>
 
@@ -225,4 +220,5 @@
         alert("已清空草稿箱")
     }
 </script>
+<script type="text/javascript" src="/js/editor.js"></script>
 @endsection

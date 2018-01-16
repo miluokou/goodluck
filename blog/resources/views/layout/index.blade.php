@@ -8,18 +8,26 @@
 	<!--确保适当的绘制和触屏缩放-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>@yield('title')</title>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+
 	<!-- 新 Bootstrap 核心 CSS 文件 -->
-	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css" />
+
 	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
-	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!--<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<!-- <link rel="stylesheet" href="/bootstrap/js/bootstrap.min.js" /> -->
+
 	<!-- <link rel="stylesheet" href="home/tanchu/css/login.css" /> -->
 	<link rel="stylesheet" href="/home/login/css/main.css" />
 	<script type="text/javascript" src="/js/login.js"></script>
 	<script type="text/javascript" src="/js/echarts.js"></script>
+	<script type="text/javascript" src="/js/center.js"></script>
 	
 	@section('css')
 	@show
@@ -57,7 +65,7 @@
 		#user{
 			vertical-align:middle;
 			width:32%;
-			padding-bottom:2.5%;
+			padding-bottom:1%;
 		}
 		#user img{
 			width: 140px;
@@ -111,19 +119,61 @@
 			width: 50%;
 			float: left;
 		}
+		#newtest{
+			    width: 30%;
+    			margin-left: 1.5%
+		}
+		#tishixin{
+			position: absolute;
+		    z-index: 9999;
+		    width: 15%;
+		    margin-left: 49%;
+		    margin-top: 3%;
+		}
+		#tishixin p{
+			color:black;
+			font-size: 12px;
+		}
 	</style>
 
 </head>
 <body>	
+	<script type="text/javascript">
+	 setTimeout("countSecond()", 3000);
+	 function countSecond(){
+	 	$("#tishixin").click();
+	 }
+	</script>
+		<div class="alert alert-info fade in" id="tishixin" data-dismiss="alert">
+			<p>提示文字</p>	    
+		</div>
+		<div class="modal fade" id="Modal-warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+					</button>
+				<h4 class="modal-title" id="myModalLabel">
+					Warning
+				</h4>
+			</div>
+			<div class="modal-body">
+				This class has started, please try to book another class
+			</div>
+				</div>
+			</div>
+		</div>
 			@section('tishixinxi')
 			@show
 		<div class="container" id="top_right">
+
 			<div class="pull-right">
 				<span>
 					<a href="/index">米洛口首页</a>&nbsp;|
 				</span>
 				<span>
-				<a id="my-home-exp" href="/home/article" target="_blank" log="type:100,pos:userbar">我的文章</a>
+				<a id="my-home-exp" href="/home/article/0" target="_blank" log="type:100,pos:userbar">我的文章</a>
 				</span>&nbsp;|&nbsp;
 				<span>
 				<a id="my-income" href="/center" target="_blank">我的米洛口</a>
@@ -260,9 +310,9 @@
 					<nav class="link-effect-2" id="link-effect-2"> 
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="/index">首页</a></li>
-							<li><a href="#about" class="scroll"><span data-hover="About">善良者保护协会</span></a></li>
-							<li><a href="#portfolio" class="scroll"><span data-hover="Portfolio">完善建议</span></a></li>
-							<li><a href="#services" class="scroll"><span data-hover="Services">思潮</span></a></li>
+							<li><a href="#about" class="scroll"><span data-hover="About">分类</span></a></li>
+							<li><a href="#portfolio" class="scroll"><span data-hover="Portfolio">关于我们</span></a></li>
+							<li><a href="#services" class="scroll"><span data-hover="Services">联系我们</span></a></li>
 							<li><a href="#mail" class="scroll"><span data-hover="Mail">网站开发中</span></a></li>
 						</ul>
 					</nav>
@@ -274,6 +324,7 @@
 		@section('main_body')
 		<!-- 排名 -->
 		<div class="container" id="main_body">
+			<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=1737701412338841415' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
 			<!-- 轮播图开始 -->
 			<div id="carousel-example-generic" class="carousel slide col-md-8 col-sm-8" data-ride="carousel">
 			  <!-- Indicators -->
@@ -314,26 +365,9 @@
 			  </a>
 			</div>
 			<!-- 轮播图结束 -->
-			<!-- 头像开始 -->
-			 <div class="container bs-example col-md-4 col-sm-4 col-xs-4 pull-right" id="user">
-			 	<div class="container col-md-12 col-sm-12 col-xs-12 ">
-			 			<center>
-				 			<div> 	
-					 		<!-- <img src="home/img/portfolio_pic8.jpg" alt="..." class="img-circle"> -->
-					 		<img src="home/img/portfolio_pic8.jpg" alt="头像" class="img-thumbnail">
-					 		</div>
-					 		<div class="user_gap">
-					 			<a href="index">米洛口的公众号↑↑↑↑↑↑</a>
-					 		</div>
-							<div id="send">
-									<a href="home/edictor"><button type="button" class="btn btn-info user_gap">发布文章</button></a><br>
-								 	<span>本站目前一共有XXXXXX位用户</span>	<br> 		
-								 	<span>你的综合排名:XXX</span>		 		
-							</div>
-						</center>
-				</div>
-			 </div>
-			<!-- 头像结束 -->
+			@section('touxiang')
+			
+			@show
 				<div class="bs-example col-md-8 col-sm-8 col-xs-8" data-example-id="simple-table">
 				    <table class="table table-striped">
 				      <caption>本周最佳</caption>
@@ -366,9 +400,10 @@
 				        </tr>
 				      </tbody>
 				    </table>
-				 </div>
+				 <!-- </div> -->
+				 
 			
-				<div class="bs-example col-md-8 col-sm-8 col-xs-8" data-example-id="simple-responsive-table">
+				<!-- <div class="bs-example col-md-8 col-sm-8 col-xs-8" data-example-id="simple-responsive-table"> -->
 				    <div class="table-responsive">
 				      <table class="table table-striped">
 				      	<caption>本月最佳</caption>
@@ -403,6 +438,65 @@
 				      </table>
 				    </div><!-- /.table-responsive -->
 		  		</div>
+		  		<div class="bs-example col-md-4 col-sm-4 col-xs-4" data-example-id="simple-table" id="newtest">
+				    <table class="table table-striped">
+				      <caption>最新更新</caption>
+				      <thead>
+				        <tr>
+				          <th>排名</th>
+				          <th>作者</th>
+				          <th>作品名</th>
+				        </tr>
+				      </thead>
+				      <tbody>
+				        <tr>
+				          <th scope="row">1</th>
+				          <td>Mark</td>
+				          <td>Otto</td>
+				        </tr>
+				        <tr>
+				          <th scope="row">2</th>
+				          <td>Jacob</td>
+				          <td>Thornton</td>
+				        </tr>
+				        <tr>
+				          <th scope="row">3</th>
+				          <td>Larry</td>
+				          <td>the Bird</td>
+				        </tr>
+				        <tr>
+				          <th scope="row">4</th>
+				          <td>Larry</td>
+				          <td>the Bird</td>
+				        </tr>
+				        <tr>
+				          <th scope="row">5</th>
+				          <td>Larry</td>
+				          <td>the Bird</td>
+				        </tr>
+				        <tr>
+				          <th scope="row">6</th>
+				          <td>Larry</td>
+				          <td>the Bird</td>
+				        </tr>
+				        <tr>
+				          <th scope="row">7</th>
+				          <td>Larry</td>
+				          <td>the Bird</td>
+				        </tr>
+				        <tr>
+				          <th scope="row">8</th>
+				          <td>Larry</td>
+				          <td>the Bird</td>
+				        </tr>
+				        <tr>
+				          <th scope="row">9</th>
+				          <td>Larry</td>
+				          <td>the Bird</td>
+				        </tr>
+				      </tbody>
+				    </table>
+				 </div>
 	  	</div>
 	  	@show
 	  	<footer id="wgt-footer" class="container wgt-footer">
@@ -412,7 +506,7 @@
 	&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_editor.html" target="_blank" rel="nofollow">作者创作作品协议</a>
 	&nbsp;&nbsp;    京ICP证XXXXX号-X 京网文【XXXX】XXXX-XXX号
 			<a href="http://www.prccopyright.org.cn/default.aspx">中国文字著作协会</a>
-			<a href="http://naotu.baidu.com/">百度脑图</a>
+			<a href="http://naotu.baidu.com/" target="view_window">百度脑图</a>
 
 			</center>
 		</footer>

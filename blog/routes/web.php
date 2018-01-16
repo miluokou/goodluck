@@ -19,15 +19,18 @@ Route::get('/index','HomeIndexController@index');
 Route::get('/home/register','LoginController@register');
 Route::post('/home/doRegister','LoginController@doRegister');
 Route::get('/home/vcode/{tmp}','LoginController@vcode');
-Route::get('/home/edictor', function(){
+Route::get('/edictor', function(){
     // return view('welcome');
     return view('home.edictor');
 });
-Route::post('home/edictor/post','EdictorController@edictor');
+Route::post('edictor/post','EdictorController@edictor');
+Route::post('edictor/edit','EdictorController@edit');
+Route::get('home/article/{id}','EdictorController@show');
+// Route::get('home/article','EdictorController@show');
 
-Route::get('home/article', function () {
-   return view('home.article');
-});
+// Route::get('home/article', function () {
+//    return view('home.article');
+// });
 // Route::get('home/center', function () {
 //    return view('home.center');
 // });
@@ -37,6 +40,7 @@ Route::post('/login','LoginController@login');
 Route::post('/addcate','CenterController@addcate');
 Route::get('home/center','CenterController@center');
 Route::get('/center','CenterController@index');
+Route::post('/editcate','CenterController@editcate');
 
 
 

@@ -134,6 +134,7 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validate)->withInput();
         }
         $input = $request->all();
+
         $username = $input['login_name'];
         $userpass = $input['login_pass'];
         if(!empty($username)){
@@ -141,8 +142,9 @@ class LoginController extends Controller
             $ser_username = $user->name;
             $ser_userpass = $user->pass;
             $token = $user->token;
+            $stauts=$user->status;
             if($ser_username == $username && $ser_userpass==$userpass){
-                echo json_encode(array('state'=>true,'info'=>$token,'username'=>$username));
+                echo json_encode(array('state'=>true,'info'=>$token,'username'=>$username,'status'=>$stauts));
             }else{
                 echo json_encode(array('state'=>false));
             }

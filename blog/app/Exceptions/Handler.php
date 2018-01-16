@@ -44,6 +44,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+         $debug = config('app.debug', false);
+          if ($debug) {
+            // 当 debug 为 true 时，返回默认的报错页面
+            return (new SymfonyDisplayer($debug))->createResponse($e);
+        }
+        // if($exception){
+        //     return response()->view('error.'.$exception->getStatusCode(),[],$exception->getStatusCode());
+        // }
         return parent::render($request, $exception);
     }
 

@@ -18,22 +18,22 @@ class Cate extends Model
      
     }
 	public function getTree($data, $pId)
-	{
-	    $tree = '';
-	    foreach($data as $k => $v)
-	    {
-	        if($v['pid'] == $pId)
-	        {         //父亲找到儿子
-	            $v['pid'] = self::getTree($data, $v['id']);
-	            $tree[] = $v['name'];
-	            if(!empty($v['pid'])){
-	           	 	$tree[] = $v['pid'];
-	            }
-	            //unset($data[$k]);
-	        }
-	    }
-	    return $tree;
-	}
+		{
+		    $tree = [];
+		    foreach($data as $k => $v)
+		    {
+		    	// echo '<pre>';
+		    	// var_dump($data);
+		    	// die;
+		        if($v['children'] == $pId)
+		        {         //父亲找到儿子
+		            $v['children'] = self::getTree($data, $v['value']);
+		            $tree[] = $v;
+		            //unset($data[$k]);
+		        }
+		    }
+		    return $tree;
+		}
 	// public function getName($data,)
 	// {
 	//     $tree = '';
@@ -68,6 +68,7 @@ class Cate extends Model
 	    	// die;
 	    	// if($k!='id')
 	    	if($key!="path" && $key!="paths" && $key!="status"){
+	      		// $array[$key] = $value;
 	      		$array[$key] = $value;
 	    	}
 	    }
@@ -77,4 +78,13 @@ class Cate extends Model
 	  }
 	  return $array;
 	}
+ //  function array2object($array) {
+	//   if(is_array($array)) {
+	//     $obj = new StdClass();
+	//     foreach ($array as $key => $val){
+	//       $obj->$key = $val;
+	//     }
+	//   }else { $obj = $array; }
+	//   return $obj;
+	// }
 }

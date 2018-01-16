@@ -38,36 +38,37 @@ class CenterController extends Controller
     }
      public function center()
     {
-         // $user = DB::table('cate')->where('name', $username)->first();
-         // $cates = DB::table('cate')->get();
-         // foreach ($cates as $key => $value) {
-         //    // $key=$key+1;
-         //    $cate[$key]=$value->name;
-         //     // var_dump($value);
-             
-         // }
-          $res = DB::table('cate')->
+       
+        $res=DB::table('cate')->get();
+
+        $res2 = DB::table('cate')->
         select(DB::raw('*,concat(path,",",id) as paths'))->
         orderBy('paths')->get();
+        foreach($res2 as $k2=>$v2)
+        {
+            //通过path 分辨是几级分类
+            $path = explode(',',$v2->path);
+            //通过,分出分级
+            $level=count($path)-1;
+            //根据等级添加|--
+            $v2->name = str_repeat('|--',$level).$v2->name;
+            // $v->name
+        }
+        
         $catee = new Cate();  
         $res_array = $catee->object1array($res);
-        
+
         foreach ($res_array as $key => $value) {
+            $value->children=$value->pid;
+            $value->value=$value->id;
+            unset($value->pid);
+            unset($value->id);
             $res_array[$key]=$catee->object2array($value);
         }
-        $tree = $catee->getTree($res_array,0);
-        echo json_encode(array('state'=>false,'info'=>$tree));
-    }
-    
-    public function getTree($data, $field_id, $field_pid, $pid = 0) {
-        $arr = array();
-        foreach ($data as $k=>$v) {
-            if ($v->$field_pid == $pid) {
-                $arr[$k] = $v;
-                $arr[$k]['fillable'] = self::getTree($data, $field_id, $field_pid, $v->$field_id );
-            }
-        }
-        return $arr;
+        // var_dump($catee);
+        $tree =$catee->getTree($res_array,0);
+        
+        echo json_encode(array('name'=>"首页",'children'=>$tree,'res2'=>$res2));
     }
     public function doRegister(Request $request)
     {
@@ -113,38 +114,22 @@ class CenterController extends Controller
                 }
             
         }
-    public function send(Request $request){
+    public function editcate(Request $request){
+        echo '<pre>';
         $input = $request->all();
-        // $captcha['session_vcode'] = Session::get('vcode');
-        $captcha['input'] = $input;
-        // $captcha['session_vcode'] =Session::get('vcode');
-        // $captcha['email_vcode'] = empty($input['email_vcode']);
-        if(empty($input['email_vcode'])){
-            // if($input['vcode']== $captcha['session_vcode']){
-                $rand = rand(100000,999999);
-                Session::flash('rand',$rand);
-                $email =$input['email'];
-                    // Mail::to($email);
-                $data = ['email'=>$email, 'name'=>'miluokou'];
-                Mail::send('activemail', $data, function($message) use($data)
-                {
-                    $message->to($data['email'], $data['name'])->subject('欢迎注册我们的网站,您的邮件验证码');
-                });
-                echo json_encode(array('state'=>true,'info'=>$captcha));
-            // }else{
-            //     echo json_encode(array('state'=>false,'info'=>$captcha));
-            // }
+        $id=$input['cate_father4'];
+        $edit_cate_name=$input['edit_cate_name'];
+        var_dump($id);
+        var_dump($edit_cate_name);
+        $res=DB::table('cate')
+        ->where('id', $id)
+        ->update(['name' => $edit_cate_name]);
+        if($res){
+            return redirect('/center')->with('添加成功');
         }else{
-            $session_rand = Session::get('rand');
-            // var_dump($session_rand);
-            // var_dump($input['email_vcode']);
-            // die;
-            if($session_rand == $input['email_vcode']){
-                echo json_encode(array('state'=>true,'info'=>'email compared'));
-            }else{
-                echo json_encode(array('state'=>false,'info'=>'email uncompared'));
-            }
+            return redirect('/center')->with('添加失败');
         }
+
     }
     public function addcate(Request $request){
         $input = $request->all();
@@ -154,7 +139,7 @@ class CenterController extends Controller
         // var_dump($data);
         // die;
         if($data['pid']==0){ 
-            $data['path']='0,'.$data['pid'];
+            $data['path']='0';
         }else{
             $res = DB::table('cate')->where('id',$data['pid'])->first();
             //拼接path
