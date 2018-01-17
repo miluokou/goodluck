@@ -125,7 +125,9 @@ class EdictorController extends Controller
     public function show($id){
         // var_dump($id);
         if(empty($id)){
+
             $articles = DB::table('article')->get();
+
             $articles2=array();
             foreach ($articles as $key => $value) {
                 if(!empty($value->content)){
@@ -137,7 +139,10 @@ class EdictorController extends Controller
             // var_dump($articles2);
             // die;
             $contents="";
-            return view('home.article',['articles2'=>$articles2,'contents'=>$contents]);
+            // echo '<pre>';
+            // var_dump($articles2);
+            // die;
+            return view('home.article',['articles2'=>$articles2,'contents'=>$contents,'article_title'=>'']);
         }else{
             $articles = DB::table('article')->get();
             $articles2=array();

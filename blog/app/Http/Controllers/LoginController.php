@@ -143,8 +143,9 @@ class LoginController extends Controller
             $ser_userpass = $user->pass;
             $token = $user->token;
             $stauts=$user->status;
+            $uid=$user->id;
             if($ser_username == $username && $ser_userpass==$userpass){
-                echo json_encode(array('state'=>true,'info'=>$token,'username'=>$username,'status'=>$stauts));
+                echo json_encode(array('state'=>true,'info'=>$token,'username'=>$username,'status'=>$stauts,'uid'=>$uid));
             }else{
                 echo json_encode(array('state'=>false));
             }

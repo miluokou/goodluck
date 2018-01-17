@@ -27,10 +27,11 @@
 		        <h4>
 		            文章列表
 		        </h4>
-		        <ul class="list-group">
+		        <ul class="list-group" id="article_list">
 		        	@foreach ($articles2 as $articles)
-		            <li>
-		                <a href="/home/article/{{$articles->id}}.html" title="PHP 超全局变量">
+              <!-- var_dump($articles2); -->
+		            <li data-id="{{$articles->uid}}">
+		                <a href="/home/article/{{$articles->id}}.html" title="">
 		                    {{$articles->title}}
 		                </a>
 		            </li>
@@ -74,6 +75,8 @@
 	</div>
 	<canvas id="canvas" width="450" height="450"></canvas>
 </div>
+  <script type="text/javascript" src="/js/article.js"></script>
+
 <script type="text/javascript">
 		window.onload=function(){
 		    function clock(){

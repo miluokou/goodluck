@@ -39,7 +39,8 @@ $(document).ready(function(){
 									storage.token = token;
 									storage.username = username;
 									storage.status = JSON.stringify(data.status);
-									console.log(data.status);
+									storage.uid = data.uid;
+									console.log(storage);
 									$("#login").text(storage.username);
 									$("#register").text("退出");
 									$("#register").attr('data-toggle','');
