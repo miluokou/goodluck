@@ -45,10 +45,18 @@ $(document).ready(function(){
         }
       });
  // var storage = window.localStorage;
+    console.log(JSON.parse(storage.cate));
+    
     console.log(JSON.parse(storage.status));
     if(JSON.parse(storage.status)=="门客"){
       $("[data-cmd='add']").remove();
       $("[data-cmd='edit']").remove();
+    }
+    if(JSON.parse(storage.status)=="统筹"){
+      var html_status = '<li role="presentation" class=""><a href="#profile2" role="tab" id="profile-tab2" data-toggle="tab" aria-controls="profile2" aria-expanded="false">文章管理</a></li>';
+      var html_status2 = '<div><!-- Nav tabs --><ul class="nav nav-tabs"><li role="presentation" class="active"><a href="#daishenhe" aria-controls="home" role="tab" data-toggle="tab">待审核</a></li><li role="presentation"><a href="#yishenhe" aria-controls="profile" role="tab" data-toggle="tab">已审核</a></li></ul><div class="tab-content"><div role="tabpanel" class="tab-pane active" id="daishenhe">待审核</div><div role="tabpanel" class="tab-pane" id="yishenhe">已审核</div></div></div>';
+      $('#myTabs').append(html_status);
+      $('#profile2').html(html_status2);
     }
     $(document).on("change","#cateselect",function(){
       var html;
