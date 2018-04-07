@@ -1,27 +1,23 @@
 $(document).ready(function(){
 			var storage = window.localStorage;
 			if(typeof(storage.state)!="undefined" && typeof(storage.token)!="undefined"){
-					// storage.state = storage.token;
-					// storage.token = token;
-					// storage.username = username;
 					$("#login").text(storage.username);
 					$("#login").attr('data-toggle','');
 					$("#register").text("退出");
 					$("#register").attr('data-toggle','');
 					$("#register").attr('id','logout');
 				}
-				//登出 			
 			
 			$(document).on('click',"#register_submit",function(){
 				var login_name = $("#login_name").val();
 				console.log(login_name);
 				var login_pass = $("#login_pass").val();
 				console.log(login_pass);
+				var vcode = $("#vcode_id").val();
 					var param ={};
-
-				// if(login_name && login_pass){
 							param['login_pass']=login_pass;
 							param['login_name']=login_name;
+							param['vcode']=vcode;
 							console.log(param);
 							$.ajax({
 							type: 'POST',
@@ -29,7 +25,7 @@ $(document).ready(function(){
 							data: param,
 							dataType: 'json',
 							headers: {
-							'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+								'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
 							},
 							success: function(data){
 								var token = data.info;
@@ -40,11 +36,13 @@ $(document).ready(function(){
 									storage.username = username;
 									storage.status = JSON.stringify(data.status);
 									storage.uid = data.uid;
+									storage.rand = data.rand;
 									console.log(storage);
 									$("#login").text(storage.username);
 									$("#register").text("退出");
 									$("#register").attr('data-toggle','');
 									$("#register").attr('id','logout');
+									location.reload();
 								}else{
 									storage.state = false;
 									alert('登录失败');
@@ -56,15 +54,14 @@ $(document).ready(function(){
 								alert('network error!');
 							}
 						});
-					// }else{
-					// 	alert("账号或者密码忘记填写");
-					// 	// $("#login").click();
-					// }
 					
 			})
 			$(document).on('click',"#logout",function(){
-				 localStorage.removeItem('token');
-				 localStorage.removeItem('username');
+				 window.localStorage.removeItem('token');
+				  window.localStorage.removeItem('username');
+				  window.localStorage.removeItem('token');
+				  window.localStorage.removeItem('uid');
+				  window.localStorage.removeItem('status');
 				 $("#login").text('登录');
 					$("#login").attr('href','#');
 					$("#logout").text("注册");
@@ -72,6 +69,8 @@ $(document).ready(function(){
 					$("#logout").attr('data-toggle','modal');
 					$("#login").attr('data-toggle','modal');
 					$("#logout").attr('id','register');
+
+					location.reload();
 			});
 			
 		}); 

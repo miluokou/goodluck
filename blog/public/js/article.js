@@ -1,5 +1,3 @@
-$(document).ready(function(){
-  var storage = window.localStorage;
-  // $("#article_list li").()
-
-  });
+$(document).on('click','#article_list li',function(){
+	alert('123');
+})

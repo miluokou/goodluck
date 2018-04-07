@@ -1,7 +1,6 @@
 @extends('layout.index')
 @section('title', '个人中心')
 @section('main_body')
-  <script type="text/javascript" src="/js/center.js"></script>
 
 <style type="text/css">
   #center p{
@@ -44,9 +43,9 @@
   #edit_content_right div span{
     float: left;
   }
-  .glyphicon .glyphicon-remove{
-    line-height: 
-  }
+  /*.glyphicon .glyphicon-remove{*/
+    /*line-height: 
+  }*/
 /*  #edit_content_right div p{
       margin:auto;
       vertical-align: middle;
@@ -55,7 +54,7 @@
     text-decoration: none;
   }
 </style>
-
+<script type="text/javascript" src="/js/center.js"></script>
 <div class="container" id="center">
 	<div class="bs-example-tabs" data-example-id="togglable-tabs">
     <div class="">
@@ -68,7 +67,7 @@
     <div id="myTabContent" class="tab-content">
       <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
         <div role="tabpanel" class="tab-pane fade active in col-md-4" id="home" aria-labelledby="home-tab">
-            <div class="set-menu">
+            <div class="set-menu" >
               <div class="set-btn set-add" data-cmd="add" title="添加" data-toggle="modal" data-target="#myModal">添加</div>
               <div class="set-btn set-edit" data-cmd="edit" title="编辑" data-toggle="modal" data-target=".bs-example-modal-lg"> 编辑 </div>
             </div>
@@ -113,7 +112,6 @@
                     </select>
                   </label>
                 </div>
-              
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -127,7 +125,6 @@
       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <form action="/editcate" method="post">
                 {!! csrf_field() !!}
             <div>
               <div class="modal-header">
@@ -135,7 +132,6 @@
               <h4 class="modal-title" id="myModalLabel2">编辑分类</h4>
               </div>
                 <div class="modal-body">
-                  <!-- <label> -->
                   <div class="form-group" id="edit_content">
                       <div class="form-group">
                         <label for="recipient-name" class="control-label">编辑名称为:</label>
@@ -146,42 +142,13 @@
                                 <option value="0">---请选择父类---</option>
                         </select>
                       </label>
-                      <!-- <div class="col-md-2 col-sm-2 col-xl-2">
-                        类名
-                      </div>
-                      <div class="col-md-10 col-sm-10 col-xl-10 edit_content_right">
-                        <div class="col-md-3 col-sm-3 col-xl-3 ">
-                              <a class="glyphicon glyphicon-pencil"></a>
-                              <label>分类内容1</label>
-                              <a class="glyphicon glyphicon-remove"></a>
-                        </div>                
-                        <div class="col-md-3 col-sm-3 col-xl-3">
-                          分类内容2
-                        </div>
-                      </div> -->
-                      <!-- <hr>
-                       <div class="col-md-2 col-sm-2 col-xl-2">
-                        类名2
-                      </div>
-                      <div class="col-md-10 col-sm-10 col-xl-10 edit_content_right">
-                        <div class="col-md-3 col-sm-3 col-xl-3 ">
-                              <a class="glyphicon glyphicon-pencil"></a>
-                              <label>分类内容1</label>
-                              <a class="glyphicon glyphicon-remove"></a>
-                        </div>                
-                        <div class="col-md-3 col-sm-3 col-xl-3">
-                          分类内容2
-                        </div>
-                      </div> -->
                   </div>
-                  <!-- </label> -->
                 </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                  <button type="submit" class="btn btn-primary">提交</button>
+                  <button type="" class="btn btn-primary" id="edit_cate_submit">提交</button>
               </div>
             </div>
-          </form>
           </div>
         </div>
       </div>

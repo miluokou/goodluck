@@ -7,6 +7,10 @@ $('#myTabs a').click(function (e) {
   }
 $(document).ready(function(){
   var storage = window.localStorage;
+  console.log(storage);
+  if(storage.rand){
+    $('#rand').html(storage.rand);
+  }
     $.ajax({
         type: 'GET',
         url: 'home/center',
@@ -36,9 +40,6 @@ $(document).ready(function(){
               html3+='<li><a href="#about" class="scroll"><span data-hover="About">'+data.children[i].name+'</span></a></li>';
           }
           $(".nav.navbar-nav").html(html3);
-
-          // var html4 = $("#link-effect-2").html();
-          // console.log(html4);
         },  
         error: function(jqXHR) {
           console.log(jqXHR.status);
@@ -46,8 +47,8 @@ $(document).ready(function(){
       });
  // var storage = window.localStorage;
     console.log(JSON.parse(storage.cate));
-    
-    console.log(JSON.parse(storage.status));
+    console.log(storage.username);
+    // console.log(JSON.parse(storage.status));
     if(JSON.parse(storage.status)=="门客"){
       $("[data-cmd='add']").remove();
       $("[data-cmd='edit']").remove();
@@ -133,6 +134,36 @@ $(document).ready(function(){
         }
       }
     });
+    $(document).on('click','#edit_cate_submit',function(){
+      var param={};
+      param['cate_name']=$('#cate_name').val();
+      param['cateselect4']=$('#cateselect4').val();
+      param['username']=storage.username;
+      param['token']=storage.username;
+      console.log(param);
+      console.log(storage.username);
+      // /editcate
+      $.ajax({
+        type: 'POST',
+        url: '/editcate',
+        dataType: 'JSON',
+        cache: false,
+        async: false,
+        data: param,
+        headers: {
+              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+              },
+        success: function(data) {
+          console.log(data);
+          if(data.state){
+            location.reload();
+          }
+        },  
+        error: function(jqXHR) {
+          console.log(jqXHR.status);
+        }
+      });
+    })
         
      
 })

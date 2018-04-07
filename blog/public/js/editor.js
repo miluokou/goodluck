@@ -6,22 +6,15 @@ $(document).ready(function(){
     if(typeof(storage.token)=="undefined" || typeof(storage.username)=="undefined"){
         console.log("shi undifined");
         alert("请先登录");
-        // $('#login').click();
         $("#login").click();
-        // window.history.back(-1); 
       }else{
-        console.log(JSON.parse(storage.ueditor_preference));
         var ue = UE.getEditor('editor');
-        var editbody= JSON.parse(storage.ueditor_preference)['http_testci_edictoreditor-drafts-data'];
-        // var proinfo=$("#divdata").text();  
-          
+        
+        var editbody= JSON.parse(storage.ueditor_preference)['http_www_zhuguangqian_com_edictoreditor-drafts-data'];
+        console.log(JSON.parse(storage.ueditor_preference));
         ue.ready(function() {//编辑器初始化完成再赋值  
             ue.setContent(editbody);  //赋值给UEditor  
         });
-        // var date=myDate.getDate(); 
-        //  var myDate = new Date();
-        //  var date=mydate.getDate()
-        // console.log(date);
         function p(s) {
             return s < 10 ? '0' + s: s;
         }
@@ -38,35 +31,23 @@ $(document).ready(function(){
 
         var now=year+'-'+p(month)+"-"+p(date)+" "+p(h)+':'+p(m)+":"+p(s)+"修复问题";
         console.log(now);
-        // $("#title").val(now);
         $("#cateselect option[value='11']").attr("selected",true); 
-        // console.log(editbody);
-        // console.log(typeof(editbody));
-        // $("body.view").html(editbody);
       }
   }
   yidenglu();
-  // if()
   $(document).on("click","#submit",function(){
     var title=$("input[name='title']").val();
     var content = UE.getEditor('editor').getContent();
     var cateselect=$("#cateselect").val();
     var cateselect2=$("#cateselect2").val();
     var cateselect3=$("#cateselect3").val();
-    console.log(title);
-    console.log(content);
-    console.log(cateselect);
-    console.log(cateselect2);
-    console.log(cateselect3);
-        // $(document).on('click',"#submit",function(){
-        // })
-    
     var param={
                 'title': title,
                 'content':content,
-                'cate_father':cateselect
+                'cate_father':cateselect,
+                'token':window.localStorage.token,
+                'uid':window.localStorage.uid
             }
-        // console.log()
     if(cateselect){
         param['cateselect'] =cateselect;
     }
@@ -76,6 +57,11 @@ $(document).ready(function(){
     if(cateselect3){
         param['cateselect3'] =cateselect3;
     }
+    // console.log(window.localStorage);
+    // die;
+//     console.log(param);
+// alert(param);
+
     $.ajax({
       type: 'POST',
       url: 'edictor/edit',

@@ -23,17 +23,6 @@ class CenterController extends Controller
     //
     public function index()
     {
-         // $user = DB::table('cate')->where('name', $username)->first();
-        //  $cates = DB::table('cate')->get();
-        //  foreach ($cates as $key => $value) {
-        //     $cate[$key]=$value->name;
-        //      // var_dump($value);
-             
-        //  }
-        //  // echo '<pre>';
-        //  //     var_dump($cate);
-        //  //     die;
-        // echo json_encode(array('state'=>false,'info'=>$cate));
         return view('home.center');
     }
      public function center()
@@ -115,23 +104,36 @@ class CenterController extends Controller
             
         }
     public function editcate(Request $request){
-        echo '<pre>';
+        date_default_timezone_set('PRC');
+        // echo '<pre>';
         $input = $request->all();
-        $id=$input['cate_father4'];
-        $edit_cate_name=$input['edit_cate_name'];
-        var_dump($id);
-        var_dump($edit_cate_name);
+        
+        $id=$input['cateselect4'];
+        $edit_cate_name=$input['cate_name'];
+        $username2=$input['username'];
+        $time= date('Y-m-d h:i:s',time());
+        // var_dump($time);
+        // die;
+        if(empty($id) || empty($username2) || empty($edit_cate_name)){
+            echo json_encode(array('state'=>false,'info'=>'添加失败'));
+                die;
+        }
         $res=DB::table('cate')
         ->where('id', $id)
-        ->update(['name' => $edit_cate_name]);
+        ->update(['name' => $edit_cate_name,'last_one'=>$username2,'last_time'=>$time]);
+
         if($res){
-            return redirect('/center')->with('添加成功');
+            // return redirect('/center')->with('添加成功');
+            echo json_encode(array('state'=>true,'info'=>'添加成功'));
+
         }else{
-            return redirect('/center')->with('添加失败');
+            echo json_encode(array('state'=>false,'info'=>'添加失败'));
+            // return redirect('/center')->with('添加失败');
         }
 
     }
     public function addcate(Request $request){
+
         $input = $request->all();
         $data=array();
         $data['pid']=$input['cate_father'];
@@ -154,5 +156,4 @@ class CenterController extends Controller
             return redirect('/center')->with('添加失败');
         }
     }
-
 }

@@ -1,5 +1,14 @@
 <!doctype html>
 <html lang="zh-CN">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?71d53aa86f2f001596bf579b662a927e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 <head>
 	<meta charset="UTF-8">
 	<!-- 登录部分的css -->
@@ -7,6 +16,7 @@
 	<meta name="_token" content="{{ csrf_token() }}"/>
 	<!--确保适当的绘制和触屏缩放-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>@yield('title')</title>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 
@@ -14,7 +24,6 @@
 	<!-- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css" />
-
 	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 	<!-- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -22,13 +31,12 @@
 	<!--<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<!-- <link rel="stylesheet" href="/bootstrap/js/bootstrap.min.js" /> -->
-
 	<!-- <link rel="stylesheet" href="home/tanchu/css/login.css" /> -->
 	<link rel="stylesheet" href="/home/login/css/main.css" />
 	<script type="text/javascript" src="/js/login.js"></script>
 	<script type="text/javascript" src="/js/echarts.js"></script>
-	<script type="text/javascript" src="/js/center.js"></script>
-	
+	<script type="text/javascript" src="/js/function.js"></script>
+
 	@section('css')
 	@show
 	<style type="text/css">
@@ -66,6 +74,7 @@
 			vertical-align:middle;
 			width:32%;
 			padding-bottom:1%;
+			height:auto;
 		}
 		#user img{
 			width: 140px;
@@ -139,14 +148,27 @@
 </head>
 <body>	
 	<script type="text/javascript">
-	 setTimeout("countSecond()", 3000);
-	 function countSecond(){
-	 	$("#tishixin").click();
-	 }
+	 	var mess = $("#tishixin p").html();
+
+	 	// console.log(mess);
+	 // if(typeof(mess)!="undefined"){
+			 // setTimeout("countSecond()", 1000);
+			 // setTimeout("countSecond2()", 3000);
+			 function countSecond(){
+			 // 	var mess = $("#tishixin p").html();
+			 // 	alert(mess);
+			 	$("#tishixin").click();
+			 	// $('#tishixin').attr('class',"alert alert-info fade in");
+			 }
+			 function countSecond2(){
+			 	$("#tishixin").click();
+			 	// $('#tishixin').attr('class',"alert alert-info fade in");
+			 }
+		// }
 	</script>
-		<div class="alert alert-info fade in" id="tishixin" data-dismiss="alert">
-			<p>提示文字</p>	    
-		</div>
+		<!-- <div class="alert alert-info fade in" id="tishixin" data-dismiss="alert"> -->
+			<!-- <p>{{ Session::get('info')}}</p>	     -->
+		<!-- </div> -->
 		<div class="modal fade" id="Modal-warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -173,14 +195,17 @@
 					<a href="/index">米洛口首页</a>&nbsp;|
 				</span>
 				<span>
-				<a id="my-home-exp" href="/home/article/0" target="_blank" log="type:100,pos:userbar">我的文章</a>
+					<a href="/edictor">发布文章</a>&nbsp;|
+				</span>
+				<span>
+				<a id="my-home-exp" href="/home/article/0" target="_blank" log="type:100,pos:userbar">作品页</a>
 				</span>&nbsp;|&nbsp;
 				<span>
 				<a id="my-income" href="/center" target="_blank">我的米洛口</a>
 				</span>&nbsp;|&nbsp;
-				<span>
+				<!-- <span>
 				<a title="QQ:348393887" href="#" target="_blank">情书<span id="mnum"></span></a>
-				</span>&nbsp;|&nbsp;
+				</span>&nbsp;|&nbsp; -->
 				
 				<span>
 					<!-- <button type="button" data-toggle="modal" data-target="#myModal">
@@ -194,55 +219,52 @@
 					</a>&nbsp;
 					<!-- 网站登录弹出框 用的bootstrap的模态框 -->
 					<!-- 登陆的页面开始 -->
-				<!-- <form action='/login' method='post'> -->
-					{!! csrf_field() !!}
-					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					        <span aria-hidden="true">&times;</span>
-					        </button>
-					        <h4 class="modal-title" id="exampleModalLabel">登录</h4>
-					      </div>
-					      <div class="modal-body">
-					          <div class="form-group has-success">
-					            <label for="login_name" class="control-label">笔名:</label>
-					            <input type="text" class="form-control" id="login_name" name='login_name' value="{{ old('name') }}">
-
-					            <span id="login_helpBlock1" class="help-block">{{$errors->first('login_name')}}</span>
-
-					          </div>
-					          <div class="form-group has-warning">
-					            <label for="login_pass" class="control-label">密码:</label>
-					            <input type="password" class="form-control" id="login_pass" name='login_pass'>
-					           	<span id="login_helpBlock2" class="help-block">{{$errors->first('login_pass')}}</span>
-					          </div>
-					          <div class="form-group">
-						          	<div id='form-group_yanzhengma'>
-						            	<label for="vcode_id" class="control-label" name='code'>验证码:</label>
-						            	<input type="text" class="form-control" id="vcode_id" name='vcode' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="邮件已经发送,请把验证码填写到下面">
-						            	<!-- <span id="helpBlock1" class="help-block">{{$errors->first('vcode')}}</span> -->
-						        	</div>
-						        	<br>
-						        	<div>
-						          		<a onclick="javascript:void(0);" style="..." title="刷新图片">
-											<img src="{{URL('/home/vcode/1')}}" id="captcha" alt="验证码" title="刷新图片" style='margin-left:10px;cursor:pointer' onclick="this.src = this.src+1">
-						          		</a>
-						          	</div>
-						          	
-					          </div>
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					        <!-- <input type="submit" class="btn btn-primary" value="提交" > -->
-					        <input type="button" class="btn btn-primary" data-dismiss="modal" value="提交" id="register_submit">
-					        <!-- <input type="submit"  -->
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				<!-- </form> -->
+					<!-- <form action='/login' method='post'> -->
+						{!! csrf_field() !!}
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						        <span aria-hidden="true">&times;</span>
+						        </button>
+						        <h4 class="modal-title" id="exampleModalLabel">登录</h4>
+						      </div>
+						      <div class="modal-body">
+						          <div class="form-group has-success">
+						            <label for="login_name" class="control-label">笔名:</label>
+						            <input type="text" class="form-control" id="login_name" name='login_name' value="{{ old('name') }}">
+						            <span id="login_helpBlock1" class="help-block">{{$errors->first('login_name')}}</span>
+						          </div>
+						          <div class="form-group has-warning">
+						            <label for="login_pass" class="control-label">密码:</label>
+						            <input type="password" class="form-control" id="login_pass" name='login_pass'>
+						           	<span id="login_helpBlock2" class="help-block">{{$errors->first('login_pass')}}</span>
+						          </div>
+						          <div class="form-group">
+							          	<div id='form-group_yanzhengma'>
+							            	<label for="vcode_id" class="control-label" name='code'>验证码:</label>
+							            	<input type="text" class="form-control" id="vcode_id" name='vcode' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="邮件已经发送,请把验证码填写到下面">
+							            	<!-- <span id="helpBlock1" class="help-block">{{$errors->first('vcode')}}</span> -->
+							        	</div>
+							        	<br>
+							        	<div>
+							          		<a onclick="javascript:void(0);" style="..." title="刷新图片">
+												<img src="{{URL('/home/vcode/1')}}" id="captcha" alt="验证码" title="刷新图片" style='margin-left:10px;cursor:pointer' onclick="this.src = this.src+1">
+							          		</a>
+							          	</div>
+						          </div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						        <!-- <input type="submit" class="btn btn-primary" value="提交" > -->
+						        <input type="button" class="btn btn-primary" data-dismiss="modal" value="提交" id="register_submit">
+						        <!-- <input type="submit"  -->
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					<!-- </form> -->
 					<!-- 登陆的页面结束 -->
 					<!-- 注册的页面开始 -->
 				<form action='/home/doRegister' method='post'>
@@ -274,18 +296,21 @@
 					            <input type="password" class="form-control" id="register_rpass" name='rpass' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="两次密码输入不一致">
 					            <span id="helpBlock3" class="help-block">{{$errors->first('rpass')}}</span>
 					          </div>
-					          <div class="form-group has-success">
-					            <label for="recipient-name" class="control-label">邮箱:</label>
-					            <input type="text" class="form-control" id="recipient-name" name='email' value="{{ old('email') }}" data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="邮箱格式不正确">
-					             <span id="helpBlock4" class="help-block">{{$errors->first('email')}}</span>
-					          </div>
+					          
 					          <div class="form-group">
-						          		<input type="button" class="btn btn-primary" id="btn" value="点击发送邮箱验证码" disabled="disabled"/>
-						      </div>
-					          <div class="form-group">
-						            <label for="recipient-name" class="control-label" name='email_vcode'>邮箱验证码:</label>
-						            <input type="text" class="form-control" id="email_vcode" name='email_vcode' data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content=''>
+						          	<div id='form-group_yanzhengma'>
+						            	<label for="vcode_id2" class="control-label" name='code'>验证码:</label>
+						            	<input type="text" class="form-control" id="vcode_id2" name='vcode' data-toggle="popover" data-trigger="focus" data-placement="bottom"  data-content="邮件已经发送,请把验证码填写到下面">
+						            	<!-- <span id="helpBlock1" class="help-block">{{$errors->first('vcode')}}</span> -->
+						        	</div>
+						        	<br>
+						        	<div>
+						          		<a onclick="javascript:void(0);" style="..." title="刷新图片">
+											<img src="{{URL('/home/vcode/1')}}" id="captcha" alt="验证码" title="刷新图片" style='margin-left:10px;cursor:pointer' onclick="this.src = this.src+1">
+						          		</a>
+						          	</div>
 					          </div>
+					          
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -324,195 +349,29 @@
 		@section('main_body')
 		<!-- 排名 -->
 		<div class="container" id="main_body">
-			<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=1737701412338841415' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
-			<!-- 轮播图开始 -->
-			<div id="carousel-example-generic" class="carousel slide col-md-8 col-sm-8" data-ride="carousel">
-			  <!-- Indicators -->
-			  <ol class="carousel-indicators">
-			    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			  </ol>
-			  <!-- Wrapper for slides -->
-			  <div class="carousel-inner" role="listbox">
-			    <div class="item active">
-			      <img src="home/img/featured-1.jpg" alt="...">
-			      <div class="carousel-caption">
-			        标题1
-			      </div>
-			    </div>
-			    <div class="item">
-			      <img src="home/img/featured-2.jpg" alt="...">
-			      <div class="carousel-caption">
-			        标题2
-			      </div>
-			    </div>
-			    <div class="item">
-			      <img src="home/img/featured-2.jpg" alt="...">
-			      <div class="carousel-caption">
-			        标题3
-			      </div>
-			    </div>
-			  </div>
-			  <!-- Controls -->
-			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			    <span class="sr-only">上一张</span>
-			  </a>
-			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			    <span class="sr-only">下一张</span>
-			  </a>
-			</div>
-			<!-- 轮播图结束 -->
+			
 			@section('touxiang')
 			
 			@show
-				<div class="bs-example col-md-8 col-sm-8 col-xs-8" data-example-id="simple-table">
-				    <table class="table table-striped">
-				      <caption>本周最佳</caption>
-				      <thead>
-				        <tr>
-				          <th>排名</th>
-				          <th>作者</th>
-				          <th>作品名</th>
-				          <th>评分</th>
-				        </tr>
-				      </thead>
-				      <tbody>
-				        <tr>
-				          <th scope="row">1</th>
-				          <td>Mark</td>
-				          <td>Otto</td>
-				          <td>@mdo</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">2</th>
-				          <td>Jacob</td>
-				          <td>Thornton</td>
-				          <td>@fat</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">3</th>
-				          <td>Larry</td>
-				          <td>the Bird</td>
-				          <td>@twitter</td>
-				        </tr>
-				      </tbody>
-				    </table>
-				 <!-- </div> -->
-				 
-			
-				<!-- <div class="bs-example col-md-8 col-sm-8 col-xs-8" data-example-id="simple-responsive-table"> -->
-				    <div class="table-responsive">
-				      <table class="table table-striped">
-				      	<caption>本月最佳</caption>
-				        <thead>
-				          <tr>
-				            <th>排名</th>
-				            <th>作者</th>
-				            <th>作品名</th>
-				            <th>Table heading</th>
-				          </tr>
-				        </thead>
-				        <tbody>
-				          <tr>
-				            <th scope="row">1</th>
-				            <td>Table cell</td>
-				            <td>Table cell</td>
-				            <td>Table cell</td>
-				          </tr>
-				          <tr>
-				            <th scope="row">2</th>
-				            <td>Table cell</td>
-				            <td>Table cell</td>
-				            <td>Table cell</td>
-				          </tr>
-				          <tr>
-				            <th scope="row">3</th>
-				            <td>Table cell</td>
-				            <td>Table cell</td>
-				            <td>Table cell</td>
-				          </tr>
-				        </tbody>
-				      </table>
-				    </div><!-- /.table-responsive -->
-		  		</div>
-		  		<div class="bs-example col-md-4 col-sm-4 col-xs-4" data-example-id="simple-table" id="newtest">
-				    <table class="table table-striped">
-				      <caption>最新更新</caption>
-				      <thead>
-				        <tr>
-				          <th>排名</th>
-				          <th>作者</th>
-				          <th>作品名</th>
-				        </tr>
-				      </thead>
-				      <tbody>
-				        <tr>
-				          <th scope="row">1</th>
-				          <td>Mark</td>
-				          <td>Otto</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">2</th>
-				          <td>Jacob</td>
-				          <td>Thornton</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">3</th>
-				          <td>Larry</td>
-				          <td>the Bird</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">4</th>
-				          <td>Larry</td>
-				          <td>the Bird</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">5</th>
-				          <td>Larry</td>
-				          <td>the Bird</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">6</th>
-				          <td>Larry</td>
-				          <td>the Bird</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">7</th>
-				          <td>Larry</td>
-				          <td>the Bird</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">8</th>
-				          <td>Larry</td>
-				          <td>the Bird</td>
-				        </tr>
-				        <tr>
-				          <th scope="row">9</th>
-				          <td>Larry</td>
-				          <td>the Bird</td>
-				        </tr>
-				      </tbody>
-				    </table>
-				 </div>
+				
 	  	</div>
 	  	@show
 	  	<footer id="wgt-footer" class="container wgt-footer">
 		  	<center>
-	&copy;2017米洛口&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/" target="_blank" rel="nofollow">使用米洛口前必读</a>
+	&copy;2018米洛口&nbsp;&nbsp;
+	<!-- 		
+	<a href="http://www.zhuguangqian.com/" target="_blank" rel="nofollow">使用米洛口前必读</a>
 	&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_help.html#%E7%BB%8F%E9%AA%8C%E5%8D%8F%E8%AE%AE" target="_blank" rel="nofollow">米洛口文章协议</a>
 	&nbsp;&nbsp;<a href="http://www.zhuguangqian.com/search/jingyan_editor.html" target="_blank" rel="nofollow">作者创作作品协议</a>
 	&nbsp;&nbsp;    京ICP证XXXXX号-X 京网文【XXXX】XXXX-XXX号
-			<a href="http://www.prccopyright.org.cn/default.aspx">中国文字著作协会</a>
-			<a href="http://naotu.baidu.com/" target="view_window">百度脑图</a>
-
+			<a href="http://www.prccopyright.org.cn/default.aspx">中国文字著作协会</a> -->
+			<a href="http://naotu.baidu.com/" target="view_window">百度脑图</a>&nbsp;
+			<a href="http://www.gushiwen.org/" target="view_window">古诗文网</a>&nbsp;
+			<a href="https://v3.bootcss.com/components/" target="view_window">bootstrap文档</a>
 			</center>
-		</footer>
-		<script type="text/javascript">
 
-		</script>
+		</footer>
+	
 
 </body>
 </html>

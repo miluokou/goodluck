@@ -14,6 +14,7 @@
             margin-bottom: 1%;
         }
     </style>
+    <script type="text/javascript" src="/js/center.js"></script>
 @endsection
 
 @section('nav')
@@ -25,17 +26,16 @@
             <!-- {{csrf_token()}} -->
             {{ csrf_field() }}
                 <center>
-                <section class="content bgcolor-8">
-                    <span class="input input--isao">
-                        <h3>
-                        <input class="input__field input__field--isao" type="text" id="title" onfocus="javascript:if(this.value=='文章标题')this.value='';" value="" name="title"/>
-
-                        <label class="input__label input__label--isao" for="title" data-content="">
-                            <span class="input__label-content input__label-content--isao"></span>
-                        </label>
-                        </h3>
-                    </span>
-                </section>
+                    <section class="content bgcolor-8">
+                        <span class="input input--isao">
+                            <h3>
+                                <input class="input__field input__field--isao" type="text" id="title" onfocus="javascript:if(this.value=='文章标题')this.value='';" value="" name="title"/>
+                                <label class="input__label input__label--isao" for="title" data-content="">
+                                    <span class="input__label-content input__label-content--isao"></span>
+                                </label>
+                            </h3>
+                        </span>
+                    </section>
                 </center>
                 <div class="col-md-12 col-sm-12 col-xl-12">
                     <div class="col-md-3 col-sm-3 col-xl-3 selection">

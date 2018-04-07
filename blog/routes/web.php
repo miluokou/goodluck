@@ -25,7 +25,11 @@ Route::get('/edictor', function(){
 });
 Route::post('edictor/post','EdictorController@edictor');
 Route::post('edictor/edit','EdictorController@edit');
+Route::post('edictor/update','EdictorController@article_update');
+Route::post('/edictor/view_count','EdictorController@view_count');
+
 Route::get('home/article/{id}','EdictorController@show');
+Route::post('/edictor/show_list','EdictorController@show_list');
 // Route::get('home/article','EdictorController@show');
 
 // Route::get('home/article', function () {
@@ -41,6 +45,14 @@ Route::post('/addcate','CenterController@addcate');
 Route::get('home/center','CenterController@center');
 Route::get('/center','CenterController@index');
 Route::post('/editcate','CenterController@editcate');
+
+Route::post('/edit_t','EdictorController@edit_title');
+Route::post('/token_yanzheng','ArticleController@token_yanzheng');
+Route::post('/article/delete','ArticleController@article_delete');
+Route::post('/article/public','ArticleController@article_public');
+
+
+// token_yanzheng
 
 
 

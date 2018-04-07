@@ -1,0 +1,5 @@
+UPDATE wp_term_taxonomy SET description = replace(description, 'https://wordpress', 'https://www.mceducation.com.hk/jrsci');
+
+UPDATE wp_options SET option_value = replace(option_value, 'https://wordpress', 'https://www.mceducation.com.hk/jrsci');
+
+UPDATE wp_posts SET guid = replace(guid, 'https://wordpress', 'https://www.mceducation.com.hk/jrsci');

@@ -1,0 +1,3 @@
+UPDATE wp_term_taxonomy SET description = replace(description, '旧网址', '新网址');
+UPDATE wp_options SET option_value = replace(option_value, '旧网址', '新网址');
+UPDATE wp_posts SET guid = replace(guid, '旧网址', '新网址');
