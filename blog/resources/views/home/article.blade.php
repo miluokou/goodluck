@@ -20,49 +20,27 @@
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/article.js"></script>
 @endsection
 @section('main_body')
 <div class="container" id="article">
+  {!! csrf_field() !!}
 	<div class="col-md-3 col-sm-3 col-xs-3">
 		<div class="col-md-11 col-sm-11 col-xs-11" id="course">
-        <h4>
-            文章列表
-        </h4>
-        <ul class="list-group" id="article_list">
-        	@foreach ($articles2 as $key=> $articles)
-          <!-- var_dump($articles2); -->
-              <span>{{$key}}</span>
-              @foreach($articles as $arti)
-                  @if(!empty($arti->public))
-                    <li data-id="{{$arti->id}}" style="background:#f5f5f5;">
-                      <a href="/home/article/{{$arti->id}}.html" title="">
-                          {{$arti->title}}
-                      </a>
-                    </li>
-                  @else
-                  <li data-id="{{$arti->id}}">
-                      <a href="/home/article/{{$arti->id}}.html" title="">
-                          {{$arti->title}}
-                      </a>
-                  </li>
-                  @endif
-              @endforeach
-            @endforeach
-        </ul>
 		</div>
 	</div>
 	<div class="col-md-9 col-sm-9 col-xs-9" id="content">
 		<h3 id="title_edit">
-      <span id ='article_title_text'>{{$article_title}}</span>
-      <a href="javascript:void(0)" title-id="{{$article_id}}" id="edit_titles">&nbsp;编辑</a>
-    </h3>
+	      <span id ='article_title_text'>{{$article_title}}</span>
+	      <a href="javascript:void(0)" title-id="{{$article_id}}" id="edit_titles">&nbsp;编辑</a>
+	   </h3>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div id="edit_contents_div">
-          <a href="javascript:void(0)" title-id="{{$article_id}}" id="edit_contents">编辑</a>
+          <a href="javascript:void(0)" title-id="{{$arti_id}}" id="edit_contents">编辑</a>
           <span>&nbsp;|&nbsp;</span>
-          <a href="javascript:void(0)" title-id="{{$article_id}}" id="edit_delete">删除</a>
+          <a href="javascript:void(0)" title-id="{{$arti_id}}" id="edit_delete">删除</a>
           <span>&nbsp;|&nbsp;</span>
-          <a href="javascript:void(0)" title-id="{{$article_id}}" id="private_public">
+          <a href="javascript:void(0)" title-id="{{$arti_id}}" id="private_public">
             @if($public_s ==1)
             私人
             @else
@@ -111,200 +89,5 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  var ue = UE.getEditor('container');
-  $(document).on('click','#title_edit a',function(){
-      var title_id = $('#title_edit a').attr('title-id');
-      var title = $('#article_title_text').html();
-      $('#title_edit').html('<input type="text" name="title_edit_input" value="'+title+'">{!! csrf_field() !!}');
-      $('input[name="title_edit_input"]').css("width",'80%');
-  })
-  .ready(function(){
-        var article_id = $("#title_edit a").attr('title-id');
-        $('[data-id="'+article_id+'"]').attr("class","active");
-        $('[data-id="'+article_id+'"]').css("font-weight","bold");
-        $('[data-id="'+article_id+'"] a').css("color","#f4645f");
-       var name=  $("#article_list li a").attr('href');
-       var window_url = window.location.pathname;
-       var reg = new RegExp("/home/article/|.html","g");
-        if(window_url=='/home/article/0.html' || window_url=="/home/article/0"){
-          location.href=name;
-        }
-       $('#my-home-exp').attr('href',name);
-       $('#container').hide();
-       $("#update_submit").hide();
-           var param = {};
-           param['token']= window.localStorage.token;
-           param['article_id']= article_id;
-          
-           var url1 = '/token_yanzheng';
-           var url2 = '/home/center';
-
-           var data = ajax_post(url1,param);
-           var data2 = ajax_get(url2);
-
-           if(data){
-              if(data.show_edit){
-                $('#edit_contents_div').remove();
-                $('#edit_titles').remove();
-              }
-            }else{
-              alert('请求失败')
-            }
-           if(data2){
-              var html3 = '<li class="active"><a href="/index">首页</a></li>';
-              for(var i=0;i<data2.children.length;i++){
-                  html3+='<li><a href="#about" class="scroll"><span data-hover="About">'+data2.children[i].name+'</span></a></li>';
-              }
-              $(".nav.navbar-nav").html(html3);
-           }
-     
-      if(!window.localStorage.status || !window.localStorage.token){
-        $("#edit_contents_div").remove();
-        $("#edit_titles").remove();
-        
-      }
-    })
-  .on('click','#private_public',function(){
-    var ppcontent = $("#private_public").html();
-    if(Trim(ppcontent)=="公开"){
-      $("#private_public").html("私人");
-      var p = 1;
-    }
-    if(Trim(ppcontent)=="私人"){
-      $("#private_public").html("公开");
-      var p = 0;
-    }
-    var article_id = $('#edit_contents').attr('title-id');
-    var param={};
-    param['article_id']=article_id;
-    param['p']=p;
-    var url3 = '/article/public';
-    var data3 = ajax_post(url1,param);
-    if(data3){
-      location.reload();
-    }
-  })
-  .on('click','#edit_contents',function(){
-    if($("#edit_contents").html()=="取消"){
-      $('#contents').show();
-      $('#container').hide();
-      $("#edit_contents").html("编辑");
-      $("#update_submit").hide();
-    }else{
-      var content = $('#contents').html();
-      ue.ready(function(){
-            //编辑器初始化完成再赋值  
-            ue.setContent(content);  
-            //赋值给UEditor  
-      });
-      $('#contents').hide();
-      $('#container').show();
-      $("#edit_contents").html("取消");
-      $("#update_submit").show();
-      var article_content = UE.getEditor('container').getContent();
-      window.localStorage.origion_content=article_content;
-    }
-  })
-  .on('click','#edit_delete',function(){
-      $("#myModal").modal('show');
-      $("#sure_delete").click(function(){
-        var article_id = $('#edit_contents').attr('title-id');
-        var param={};
-        param['article_id']=article_id;
-        var data4 = ajax_post('/article/delete',param);
-        if(data4.delete_state){
-            location.href=window.location.protocol+'//'+window.location.host+'/home/article/0'; 
-        }
-      });
-  })
-  .on("click",'#update_submit',function(){
-    var origion_content = window.localStorage.origion_content;
-    var param = {};
-    var article_id = $('#edit_contents').attr('title-id');
-    var article_content = UE.getEditor('container').getContent();
-    param['article_id']=article_id;
-    param['content']=article_content;
-    param['token']=window.localStorage.token;
-    if(origion_content!=article_content){
-      var data5 = ajax_post('/edictor/update',param);
-    }
-    location.reload();
-  })
-  .on('blur','input[name="title_edit_input"]',function(){
-    var param = {};
-     param['token']= window.localStorage.token;
-     param['username']= window.localStorage.username;
-     param['update_title']= $('input[name="title_edit_input"]').val();
-     param['id']= $("#edit_contents").attr('title-id');
-    var data = ajax_post('/edit_t',param);
-    if(data.state){
-        location.reload();
-    }
-  });
-  $(document).ready(function(){
-      var param = {};
-       var article_id = $('#edit_contents').attr('title-id');
-       param['token']= window.localStorage.token;
-       param['article_id']= article_id;
-      var window_url = window.location.pathname;
-      var reg = new RegExp("/home/article/|.html","g");
-      if(window_url=='/home/article/0.html' || window_url=="/home/article/0"){
-        
-      }else{
-           var data = ajax_post('/edictor/view_count',param);
-      }
-       var data = ajax_post('/edictor/show_list',param);
-       var content = foreach_first(data.articles2_new);
-       var content2={};
-       var html =' <h4>文章列表</h4><ul class="list-group" id="article_list">';
-       html += '<ul>';
-       for(var i=0;i<content.i;i++){
-         html+='<span>'+content.k[i]+'</span>';
-         content2 = foreach_first(content.v[i]);
-         console.log(content2);
-         for(var j=0;j<content2.i;j++){
-            if(content2.v[j].public == 1){
-              html+='<li data-id="'+content2.k[j]+'" style="background:#f5f5f5;">';
-              html+='<a href="/home/article/'+content2.k[j]+'.html" title="">'+content2.v[j].title+'</a></li>';
-            }else{
-              html+='<li data-id="'+content2.k[j]+'">';
-              html+='<a href="/home/article/'+content2.k[j]+'.html" title="">'+content2.v[j].title+'</a></li>';
-            }
-            
-         }
-       }
-       html += '</ul>';
-
-         console.log(html);
-      // $('#course').html(html);
-        console.log(content);
-
-       // console.log(data.articles2_new.keys());
-        // 
-        //   @foreach ($articles2 as $key=> $articles)
-        //   <!-- var_dump($articles2); -->
-        //       <span>{{$key}}</span>
-        //       @foreach($articles as $arti)
-        //           @if(!empty($arti->public))
-                    // <li data-id="{{$arti->id}}" style="background:#f5f5f5;">
-                    //   <a href="/home/article/{{$arti->id}}.html" title="">
-                    //       {{$arti->title}}
-                    //   </a>
-                    // </li>
-        //           @else
-        //           <li data-id="{{$arti->id}}">
-        //               <a href="/home/article/{{$arti->id}}.html" title="">
-        //                   {{$arti->title}}
-        //               </a>
-        //           </li>
-        //           @endif
-        //       @endforeach
-        //     @endforeach
-        // </ul>
-
-       
-  })
-</script> 
+ 
 @endsection

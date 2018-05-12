@@ -10,4 +10,9 @@ class Edit extends Model
     	
      return '123';
     }
+//  public function update_tables($table_name,$ziduanming,$update_content){
+//  
+//  		$a='123';
+//  		return $a;
+    }
 }

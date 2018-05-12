@@ -11,10 +11,13 @@ $(document).ready(function(){
         var ue = UE.getEditor('editor');
         
         var editbody= JSON.parse(storage.ueditor_preference)['http_www_zhuguangqian_com_edictoreditor-drafts-data'];
-        console.log(JSON.parse(storage.ueditor_preference));
-        ue.ready(function() {//编辑器初始化完成再赋值  
-            ue.setContent(editbody);  //赋值给UEditor  
-        });
+        console.log(editbody);
+        if(typeof(editbody)!="undefined"){
+	        	 ue.ready(function() {//编辑器初始化完成再赋值  
+	            ue.setContent(editbody);  //赋值给UEditor  
+	        });
+        }
+       
         function p(s) {
             return s < 10 ? '0' + s: s;
         }

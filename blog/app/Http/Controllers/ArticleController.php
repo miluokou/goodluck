@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Edit;
@@ -20,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 class ArticleController extends Controller
 {
     public function show($id){
+	
             $articles = DB::table('article')->get();
             $cates = DB::table('cate')->get();
              foreach ($cates as $ckey => $cvalue) {
@@ -46,21 +46,18 @@ class ArticleController extends Controller
             return view('home.article',['article_title'=>$articles->title,'article_id'=>$articles->id,'articles2'=>$articles2,'contents'=>$contents]);
         }
     }
-    // public function edit_title(Request $request){
-    // 	 $input = $request->all();
-
-    // 	 echo json_encode(array('info'=>$input));
-    // }
+    
     public function token_yanzheng(Request $request){
-        $input = $request->all();
+		$input = $request->all();
         $article_id = $input['article_id'];
-        $token = $input['token'];
-       $res = DB::table('article')->where('id',$article_id)->get();
-       if($res[0]->token == $token){
-            echo json_encode(array('show_edit'=>false));
-       }else{
-            echo json_encode(array('show_edit'=>true));
-       }
+        $token = $article_id.$input['token'];
+		$res = DB::table('article')->where('id',$article_id)->get();
+//		var_dump($input);
+		if(Hash::check($token, $res[0]->token)){
+			echo json_encode(array('show_edit'=>false));
+		}else{
+			echo json_encode(array('show_edit'=>true));
+		}
     }
     public function article_delete(Request $request){
         $input = $request->all();
@@ -79,8 +76,6 @@ class ArticleController extends Controller
     }
      public function article_public(Request $request){
         $input = $request->all();
-        // var_dump($input);
-        // die;
         $article_id = $input['article_id'];
         $public = $input['p'];
         $res = DB::table('article_detail')->where('article_id',$article_id)->first();

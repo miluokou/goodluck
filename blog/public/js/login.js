@@ -20,34 +20,34 @@ $(document).ready(function(){
 							param['vcode']=vcode;
 							console.log(param);
 							$.ajax({
-							type: 'POST',
-							url:'/login',
-							data: param,
-							dataType: 'json',
-							headers: {
-								'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-							},
-							success: function(data){
-								var token = data.info;
-								var username = data.username;
-								if(data.state){
-									storage.state = storage.token;
-									storage.token = token;
-									storage.username = username;
-									storage.status = JSON.stringify(data.status);
-									storage.uid = data.uid;
-									storage.rand = data.rand;
+								type: 'POST',
+								url:'/login',
+								data: param,
+								dataType: 'json',
+								headers: {
+									'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+								},
+								success: function(data){
+									var token = data.info;
+									var username = data.username;
+									if(data.state){
+										storage.state = storage.token;
+										storage.token = token;
+										storage.username = username;
+										storage.status = JSON.stringify(data.status);
+										storage.uid = data.uid;
+										storage.rand = data.rand;
+										console.log(storage);
+										$("#login").text(storage.username);
+										$("#register").text("退出");
+										$("#register").attr('data-toggle','');
+										$("#register").attr('id','logout');
+										location.reload();
+									}else{
+										storage.state = false;
+										alert('登录失败');
+									}
 									console.log(storage);
-									$("#login").text(storage.username);
-									$("#register").text("退出");
-									$("#register").attr('data-toggle','');
-									$("#register").attr('id','logout');
-									location.reload();
-								}else{
-									storage.state = false;
-									alert('登录失败');
-								}
-								console.log(storage);
 
 							},
 							error: function(xhr, type){

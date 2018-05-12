@@ -3,6 +3,58 @@
 	@section('tishixinxi')
 	<script type="text/javascript" src="/js/register.js"></script>
 	<script type="text/javascript" src="/js/center.js"></script>
+	<style> 
+		@font-face
+		{
+		font-family: myFirstFont;
+		src: url('/css/xjlzt.fon'),
+		     url('/css/xjlzt.fon'); /* IE9+ */
+		}
+		
+		#qiandao .modal-body center{
+			font-family:myFirstFont !important;
+		}
+	</style>
+	<script type="text/javascript">
+//    function draw(){
+//      var canvas = document.getElementById('tutorial');
+//      if (canvas.getContext){
+//        var ctx = canvas.getContext('2d');
+//      }
+$(document).ready(function(){
+		var canvas=document.getElementById('myCanvas');
+		var bb=canvas.getContext('2d');
+//		ctx.fillStyle='#FF0000';
+//		ctx.fillRect(0,0,80,100);
+//       var ctx = document.getElementById('myCanvas').getContext('2d');
+//		 ctx.font = "48px serif";
+//		ctx.textBaseline = "hanging";
+//		ctx.strokeText("Hello world", 0, 100);
+		
+		bb.fillStyle = '#99f';    //   填充颜色  
+        bb.fillRect(0,0,1000,1000);  
+  
+//      var img = new Image;  
+//      img.src = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525547343312&di=02354016a31a3c86828b78cccb99a4f5&imgtype=0&src=http%3A%2F%2Fpic7.photophoto.cn%2F20080408%2F0034034431511765_b.jpg';  
+//		
+//      img.onload = function () {  
+//          bb.drawImage(img, 0,0,canvas.width,canvas.height);  
+//      }  
+  
+        bb.fillStyle = '#fff';   // 文字填充颜色  
+        bb.font = '33px myFirstFont';  
+        bb.fillText('怎么得到你想要的?',0,250);  
+  
+        bb.fillStyle = '#fff';  
+        bb.font = '66px myFirstFont';  
+        bb.fillText('让自己配得上!',0,200);  
+  
+        bb.stroke(); 
+});
+    </script>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var o = document.getElementById("carousel-example-generic");
@@ -15,7 +67,16 @@
 			}
 		})
 	</script>
-	
+	<?php
+//		$src = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525547343312&di=02354016a31a3c86828b78cccb99a4f5&imgtype=0&src=http%3A%2F%2Fpic7.photophoto.cn%2F20080408%2F0034034431511765_b.jpg';
+//		$info = getimagesize($src);
+//		$type = image_type_to_extension($info[2],false);
+////		$fun = "imagecreateform{$type}";
+//		$fun = imagecreateform($type);
+////		$image = $fun($src);
+//		echo '<pre>';
+//		var_dump($fun);
+	?>
 	<button type="button" id='mybutton' class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm"  style='display:none;' value="{{ Session::get('info')}}">Small modal</button>
   <!-- 提示信息框 -->
 	<div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -26,6 +87,21 @@
 	  </div>
 	</div>
 	<!-- 提示信息框 -->
+	
+	<div class="modal fade" id="qiandao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+		  <div class="modal-dialog" role="document">
+			    <!--<div class="modal-content">-->
+				      <!--<div class="modal-body" onload="draw();">-->
+						<!--<canvas id="canvas" width="150" height="150">
+				      		<center>
+								<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525547343312&di=02354016a31a3c86828b78cccb99a4f5&imgtype=0&src=http%3A%2F%2Fpic7.photophoto.cn%2F20080408%2F0034034431511765_b.jpg"  width="100%" title="">图片中的文字
+				      		</center>
+			      		</canvas>-->
+			      		<canvas id="myCanvas" width="555" height="1000">your browser does not support the canvas tag </canvas>
+				      <!--</div>-->
+			    <!--</div>-->
+		  </div>
+	</div>
 	@endsection
 	@section('touxiang')
 		<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=1737701412338841415' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
@@ -82,9 +158,9 @@
 					 			<a href="index">米洛口的公众号↑↑↑↑↑↑</a>
 					 		</div>
 							<div id="send">
-									<a href="/edictor"><button type="button" class="btn btn-info user_gap">发布文章</button></a><br>
+									<a href="#" data-toggle="modal" data-target="#qiandao"  data-whatever="@fat"><button type="button" class="btn btn-info user_gap">签到</button></a><br>
 								 	<span>本站目前一共有&nbsp;<b>{{$total}}</b>&nbsp;位门客</span>	<br> 		
-								 	<span>你的综合排名:<span id="rand">XXX</span></span>		 		
+								 	<span style="font-family:myFirstFont !important;font-size: 33px;">你的综合排名:<span id="rand">XXX</span></span>		 		
 							</div>
 						</center>
 				</div>
